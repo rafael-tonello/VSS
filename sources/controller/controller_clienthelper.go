@@ -142,7 +142,7 @@ func (h *ControllerClientHelper) GetObservingVarsCount() int {
 
 func (h *ControllerClientHelper) GetObservingVars() []string {
 	res := []string{}
-	childs := h.db.GetChilds("internal.clients.byId." + h.clientId + ".observing")
+	childs := h.db.GetChildNames("internal.clients.byId." + h.clientId + ".observing")
 	for _, c := range childs {
 		if strings.Contains(c, "count") || strings.Contains(c, "size") {
 			continue

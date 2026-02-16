@@ -206,7 +206,7 @@ func (c *ControllerVarHelper) GetMetadatasOfAClient(clientID string) []string {
 	result := make([]string, 0)
 
 	//childs := c.db.GetChilds(R(c.name + "._observers.byId." + clientID + ".byMetadata"))
-	childs := c.db.GetChilds(c.name + "._observers.byId." + clientID + ".byMetadata")
+	childs := c.db.GetChildNames(c.name + "._observers.byId." + clientID + ".byMetadata")
 	for _, curr := range childs {
 		if strings.Contains(curr, ".") {
 			metadata := curr[strings.Index(curr, ".")+1:]
@@ -230,7 +230,7 @@ func (c *ControllerVarHelper) SetValue(v misc.DynamicVar) {
 }
 
 func (c *ControllerVarHelper) GetChildNames() []string {
-	childs := c.db.GetChilds(c.name)
+	childs := c.db.GetChildNames(c.name)
 	res := make([]string, 0)
 	for _, ch := range childs {
 		if ch == "" {

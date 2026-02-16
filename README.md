@@ -110,6 +110,10 @@ VSTP is a text and single TCP connection based protocol, and you can use it over
 
     Once inside the telnet session, you can use the command '--help' to see a list of available commands.
 
+# Documentation
+
+[Read VSS docs to understand it](./docs/DOC.md)
+
 # Task lists
 ## Main task List
     charaters to be used ✔ ✘
@@ -287,9 +291,9 @@ General Configurations:
         Command line        : --maxTimeWaitingForClients 
         Environment variable: VSS_MAX_TIME_WAITING_CLIENTS
 
-    dbDirectory: Directory to store the database files. Default is %APP_DIR%/data/database.
-        Configuration File  : dbDirectory
-        Command line        : --dbDirectory
+    DbPath: Directory to store the database files. Default is %APP_DIR%/data/database.
+        Configuration File  : DbPath
+        Command line        : --DbPath
         Environment variable: VSS_DB_DIRECTORY
         
     httpDataDir: Directory to store the http data files. Default is %APP_DIR%/data/http_data.
@@ -331,7 +335,7 @@ Command line call:
         -h, --help: Show this help message and exit.    
         -v, --version: Show version information and exit.
         --maxTimeWaitingForClients: Maximum time waiting for clients to reconnect in a case of connection lost. Default is 12 hours.
-        --dbDirectory: Directory to store the database files. Default is %APP_DIR%/data/database.
+        --DbPath: Directory to store the database files. Default is %APP_DIR%/data/database.
         --httpDataDir: Directory to store the http data files. Default is %APP_DIR%/data/http_data.
         --httpApiPort: Port to listen for http api requests. Default is 5024.
         --httpApiHttpsPort: Port to listen for https api requests. Default is 5025.

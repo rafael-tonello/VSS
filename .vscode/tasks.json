@@ -6,7 +6,7 @@
         {
             "label": "buildDebug",
             "type": "shell",
-            "command": "shu build --debug",
+            "command": "./pman.sh build --debug",
             "args": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -22,7 +22,7 @@
         {
             "label": "buildProd",
             "type": "shell",
-            "command": "shu build",
+            "command": "./pman.sh build",
             "args": [],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -38,7 +38,7 @@
         {
             "label": "buildTests",
             "type": "shell",
-            "command": "shu build --tests",
+            "command": "./pman.sh build --tests",
             "args": [],
             "options": {
                 "cwd": "${workspaceFolder}/tests"

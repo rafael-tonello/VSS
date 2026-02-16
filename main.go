@@ -143,10 +143,14 @@ func displayHelpOrVersion() bool {
 			fmt.Println("  --http-api-cert-file              Set the HTTPS certificate file (default: ./ssl/cert/vssCert.pem or value in conf file)")
 			fmt.Println("  --http-api-key-file               Set the HTTPS key file (default: ./ssl/cert/vssKey.pem or value in conf file)")
 			fmt.Println("  --http-api-returns-full-paths     If true, HTTP API will return entire variables paths in the JSON results (default: false or value in conf file)")
+			fmt.Println("  --http-data-directory <path>      Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)")
 			fmt.Println("  --ram-cache-db-dump-interval-ms   Set the interval, in milliseconds, to RamCacheDB service check for changes in the memory and dump data to disk (default: 60000 or value in conf file)")
 			fmt.Println("  --vstp-api-port <port>            Set the VSTP API port (default: 5032 or value in conf file)")
-			fmt.Println("  --db-directory <path>             Set the database directory (default: /var/vss/data/database or value in conf file)")
-			fmt.Println("  --http-data-directory <path>      Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)")
+			fmt.Println("  --db-driver <driver_name>         Set the database driver (default: ramcacheddb or value in conf file). Available drivers: ramcacheddb, ramcacheddbpkv")
+			fmt.Println("    driver names:")
+			fmt.Println("      ramcacheddb                       An in-memory database with periodic dumps to disk. Uses a custom tree structure to store variables and their hierarchy. Data is stored in a single file on disk. This is the default driver.")
+			fmt.Println("      ramcacheddbpkv                    Similar to ramcacheddb but uses a prefix tree (key-value store) for storage. This may provide better performance for certain workloads and allows more efficient storage of hierarchical keys. Data is stored in a single file on disk.")
+			fmt.Println("  --db-path <path>                  Set the database path (default: /var/vss/data/database or value in conf file). Db driver dices if it wll be a file or a directory based on the presence of an extension in the provided path.")
 			fmt.Println("  --max-log-file-size <size_in_bytes>")
 			fmt.Println("  									 Set the maximum log file size in bytes before rotation (default: 52428800 or value in conf file)")
 			fmt.Println("  --max-time-waiting-for-clients <seconds>")
@@ -176,7 +180,8 @@ func displayHelpOrVersion() bool {
 			fmt.Println("  VSS_HTTP_API_RETURN_FULL_PATHS    Same as --http-api-return-full-paths")
 			fmt.Println("  VSS_RAM_CACHE_DB_DUMP_INTERVAL_MS Same as --ram-cache-db-dump-interval-ms")
 			fmt.Println("  VSS_VSTP_API_PORT                 Same as --vstp-api-port")
-			fmt.Println("  VSS_DB_DIRECTORY                  Same as --db-directory")
+			fmt.Println("  VSS_DB_DRIVER                     Same as --db-driver")
+			fmt.Println("  VSS_DB_PATH                       Same as --db-path")
 			fmt.Println("  VSS_HTTP_DATA_DIRECTORY           Same as --http-data-directory")
 			fmt.Println("  VSS_MAX_LOG_FILE_SIZE             Same as --max-log-file-size")
 			fmt.Println("  VSS_MAX_TIME_WAITING_CLIENTS      Same as --max-time-waiting-clients")
@@ -245,7 +250,7 @@ func printBanner(logger logger.ILogger, configs confs.IConfs) {
 
 	text += "" + "|   +-- log file: " + determineLogFile() + "\n"
 
-	tmp := configs.GetConfig("DbDirectory").Value()
+	tmp := configs.GetConfig("DbPath").Value()
 	text += "" + "|   +-- database folder: " + tmp.GetString() + "\n"
 	text += "" + "+-- Services" + "\n"
 
@@ -284,9 +289,9 @@ func initConfigurations() confs.IConfs {
 	)
 
 	theConfs.AddPlaceHolders(map[string]string{
-		"%PROJECT_DIR%":              getApplicationDirectory(false),
-		"%APP_DIR%":                  getApplicationDirectory(false),
-		"%SUGGESTED_DATA_DIRECTORY%": suggestDataDirectory(),
+		"%PROJECT_DIR%":         getApplicationDirectory(false),
+		"%APP_DIR%":             getApplicationDirectory(false),
+		"%SUGGESTED_DATA_PATH%": suggestDataDirectory(),
 	})
 
 	//#region maxLogFileSize {
@@ -383,17 +388,32 @@ func initConfigurations() confs.IConfs {
 	)
 	//#endregion }
 
-	//#region DbDirectory {
-	theConfs.CreateConfig("DbDirectory",
-		confs.WithPossibleNames([]string{"db-directory", "--db-directory", "VSS_DB_DIRECTORY"}),
-		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_DIRECTORY%/database")),
+	//#region DbDriver {
+	theConfs.CreateConfig("DbDriver",
+		confs.WithPossibleNames([]string{"db-driver", "--db-driver", "VSS_DB_DRIVER"}),
+		confs.WithDefaultValue(misc.NewDynamicVar("ramcacheddb")),
+		confs.WithValidationFunc(func(conf confs.IConfItem) error {
+			value := conf.NotMappedValue()
+			valueStr := strings.ToLower(value.GetString())
+			if !(valueStr == "ramcacheddb" || valueStr == "ramcacheddbpkv") {
+				return fmt.Errorf("received '%s', must be a valid database driver (ramcacheddb or ramcacheddbpkv)", valueStr)
+			}
+			return nil
+		}),
+	)
+	//#endregion }
+
+	//#region DbPath {
+	theConfs.CreateConfig("DbPath",
+		confs.WithPossibleNames([]string{"db-path", "--db-path", "VSS_DB_PATH"}),
+		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_PATH%/database")),
 	)
 	//#endregion }
 
 	//#region httpDataDir {
 	theConfs.CreateConfig("httpDataDir",
 		confs.WithPossibleNames([]string{"http-data-directory", "--http-data-directory", "--http-data-dir", "VSS_HTTP_DATA_DIRECTORY"}),
-		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_DIRECTORY%/http_data")),
+		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_PATH%/http_data")),
 	)
 	//#endregion }
 
@@ -645,10 +665,26 @@ func setupStdoutAndStderrInterception(logManager logger.ILogger) {
 
 func initStorage(configs confs.IConfs, logger logger.ILogger) storage.IStorage {
 
-	dbDirectoryConfig := configs.GetConfig("DbDirectory").Value()
-	dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
-	_ = os.MkdirAll(dbDirectoryConfig.GetString(), 0755)
-	theStorage := storage.NewRamCacheDB(logger, dbDirectoryConfig.GetString(), dbDumpIntervalConfig.GetInt())
+	DbDriverConfig := configs.GetConfig("DbDriver").Value()
+	DbPathConfig := configs.GetConfig("DbPath").Value()
+
+	var theStorage storage.IStorage = nil
+	var err error = nil
+
+	if DbDriverConfig.GetString() == "ramcacheddbpkv" {
+		logger.Info("    using a RamCacheDB Driver (data are load/stored in a txt file)")
+		dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
+		_ = os.MkdirAll(DbPathConfig.GetString(), 0755)
+		theStorage = storage.NewRamCacheDB(logger, DbPathConfig.GetString(), dbDumpIntervalConfig.GetInt())
+	} else {
+		logger.Info("    using a RamCacheDBPKV Driver (data are load/stored in a prefixtree file)")
+		dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
+		theStorage, err = storage.NewRamCachedDBPkv(logger, DbPathConfig.GetString(), dbDumpIntervalConfig.GetInt())
+		if err != nil {
+			logger.Error("Main", "Failed to initialize storage: "+err.Error())
+			panic("Failed to initialize storage: " + err.Error())
+		}
+	}
 
 	return theStorage
 }
