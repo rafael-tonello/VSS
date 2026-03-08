@@ -183,8 +183,8 @@ func (c *ControllerVarHelper) internalRemoveObserving(clientID string, metadata 
 			c.db.DeleteValue(c.name+"._observers.list."+strconv.Itoa(actualCount-1), true)
 			actualCount--
 			c.db.Set(c.name+"._observers.list.count", misc.NewDynamicVar(actualCount))
-			// remove byId mapping for this client/metadata
-			c.db.DeleteValue(c.name+"._observers.byId."+clientID, true)
+			// remove byId mapping for this specific client/metadata combination only
+			c.db.DeleteValue(c.name+"._observers.byId."+clientID+".byMetadata."+metadata, false)
 			break
 		}
 	}

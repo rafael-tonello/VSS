@@ -544,12 +544,12 @@ func (c *TheController) checkClientLiveTime(ch ControllerClientHelper) {
 // deleteClient removes a client from observation and removes its observing entries.
 func (c *TheController) deleteClient(ch ControllerClientHelper) {
 	vars := ch.GetObservingVars()
-	ch.RemoveClientFromObservationSystem()
 	for _, currVar := range vars {
 		vh := NewControllerVarHelper(c.db, c.allowRawDbAccess)
 		vh.SetControlledVarName(currVar)
 		vh.RemoveAllClientObservations(ch.GetClientId())
 	}
+	ch.RemoveClientFromObservationSystem()
 }
 
 // notifyVarModification informs clients about a variable change.
