@@ -159,6 +159,9 @@ func (r *RamCachedDB) Set(name string, v misc.DynamicVar) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	item := r.scrollTree(name, &r.root, false)
+
+	item.tags["changed"] = true //used by ramcachedbpkv
+
 	if item != nil {
 		item.value = v
 		r.pendingChanges.Store(true)
@@ -224,6 +227,7 @@ func (r *RamCachedDB) DeleteValue(name string, deleteChildsInACascade bool) {
 	}
 	// clear value
 	item.value = misc.NewEmptyDynamicVar()
+	item.tags["changed"] = true //used by ramcachedbpkv
 	if deleteChildsInACascade {
 		item.childs = make(map[string]*ramNode)
 	}
