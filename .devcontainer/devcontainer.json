@@ -1,0 +1,29 @@
+{
+  "name": "VarStreamServer (Go + CGO)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "CGO_ENABLED": "1",
+    "GOTOOLCHAIN": "auto"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-vscode.cpptools"
+      ],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.toolsManagement.autoUpdate": true,
+        "go.testFlags": [
+          "-v"
+        ]
+      }
+    }
+  },
+  "postCreateCommand": "go mod download && go version && g++ --version",
+  "postStartCommand": "sh -lc \"git config --global --add safe.directory '${containerWorkspaceFolder}'\""
+}
