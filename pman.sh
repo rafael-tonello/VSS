@@ -81,7 +81,7 @@
         fi
 
 
-        if ! echo "$COMMIT_MSG" | grep -qE '^(feat|fix|patch|chore|docs|refactor|test|perf|ci|build|revert|style|doc|BREAKING CHANGE):'; then
+        if ! echo "$COMMIT_MSG" | grep -qE '^(feat|fix|patch|chore|docs|refactor|test|perf|ci|build|revert|style|doc|BREAKING CHANGE)([[:space:]]*\([^()]+\))?:'; then
             echo "❌ wrong commit message format."
             echo "Use one of the following prefixes:"
             echo "  - feat: for new features"
