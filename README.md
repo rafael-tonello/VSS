@@ -149,8 +149,3 @@ Read more about VSTP in [VSTP Protocol](./docs/VSTP.md)
 
 
 
-<!-- vss logo -->
-![VSS Logo](./docs/vss_logo.svg)
-
-
-
