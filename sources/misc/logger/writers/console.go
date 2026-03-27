@@ -55,7 +55,8 @@ func (c *ConsoleWriter) Write(msg string, level int, name string, dateTime time.
 		case logger.LEVEL_ERROR:
 			out = "\033[0;31m" + out + "\033[0m"
 		case logger.LEVEL_CRITICAL:
-			out = "\033[0;31m" + out + "\033[0m"
+			//white and red background
+			out = "\033[1;37;41m" + out + "\033[0m"
 		case logger.LEVEL_DEBUG:
 			out = "\033[0;35m" + out + "\033[0m"
 		case logger.LEVEL_DEBUG2, logger.LEVEL_TRACE:
