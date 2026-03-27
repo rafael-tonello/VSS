@@ -66,6 +66,34 @@ func getTerminalSize() (width, height int, err error) {
 	return w, h, nil
 }
 
+/*
+func getTerminalSize() int {
+	const defaultTerminalSize = 80
+
+	// Try common terminal streams first.
+	fds := []int{int(os.Stdout.Fd()), int(os.Stderr.Fd()), int(os.Stdin.Fd())}
+	for _, fd := range fds {
+		if fd < 0 {
+			continue
+		}
+
+		width, _, err := term.GetSize(fd)
+		if err == nil && width > 0 {
+			return width
+		}
+	}
+
+	// Fallback for non-interactive contexts where COLUMNS is exported.
+	if cols := os.Getenv("COLUMNS"); cols != "" {
+		if parsed, err := strconv.Atoi(cols); err == nil && parsed > 0 {
+			return parsed
+		}
+	}
+
+	return defaultTerminalSize
+}
+*/
+
 func IsTerminal() bool {
 	return term.IsTerminal(int(os.Stdin.Fd()))
 }
@@ -127,6 +155,69 @@ func PrintAtCenterOfTerminal(text string) {
 			break
 		}
 	}
+}
+
+// enum colors for terminal
+type TerminalColor int
+
+const (
+	TerminalColorReset TerminalColor = iota
+	TerminalColorRed
+	TerminalColorGreen
+	TerminalColorYellow
+	TerminalColorBlue
+	TerminalColorMagenta
+	TerminalColorCyan
+	TerminalColorWhite
+	TerminalColorGray
+)
+
+func PrintWithColor(text string, color TerminalColor) {
+	colorCodes := map[TerminalColor]string{
+		TerminalColorReset:   "\033[0m",
+		TerminalColorRed:     "\033[31m",
+		TerminalColorGreen:   "\033[32m",
+		TerminalColorYellow:  "\033[33m",
+		TerminalColorBlue:    "\033[34m",
+		TerminalColorMagenta: "\033[35m",
+		TerminalColorCyan:    "\033[36m",
+		TerminalColorWhite:   "\033[37m",
+		TerminalColorGray:    "\033[90m",
+	}
+
+	colorCode := colorCodes[color]
+	fmt.Print(colorCode + text + colorCodes[TerminalColorReset])
+}
+
+func PrintWithColorAndBg(text string, color TerminalColor, backgroundColor TerminalColor) {
+	colorCodes := map[TerminalColor]string{
+		TerminalColorReset:   "\033[0m",
+		TerminalColorRed:     "\033[31m",
+		TerminalColorGreen:   "\033[32m",
+		TerminalColorYellow:  "\033[33m",
+		TerminalColorBlue:    "\033[34m",
+		TerminalColorMagenta: "\033[35m",
+		TerminalColorCyan:    "\033[36m",
+		TerminalColorWhite:   "\033[37m",
+		TerminalColorGray:    "\033[90m",
+	}
+
+	bgColorCodes := map[TerminalColor]string{
+		TerminalColorReset:   "\033[0m",
+		TerminalColorRed:     "\033[41m",
+		TerminalColorGreen:   "\033[42m",
+		TerminalColorYellow:  "\033[43m",
+		TerminalColorBlue:    "\033[44m",
+		TerminalColorMagenta: "\033[45m",
+		TerminalColorCyan:    "\033[46m",
+		TerminalColorWhite:   "\033[47m",
+		TerminalColorGray:    "\033[100m",
+	}
+
+	colorCode := colorCodes[color]
+	bgColorCode := bgColorCodes[backgroundColor]
+
+	fmt.Print(colorCode + bgColorCode + text + colorCodes[TerminalColorReset] + bgColorCodes[TerminalColorReset])
 }
 
 //#endregion }
