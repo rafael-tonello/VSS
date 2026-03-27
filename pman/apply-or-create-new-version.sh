@@ -61,7 +61,7 @@ tryCreateVersion(){
     for commit in $commits; do
         local message=$(git log -1 --pretty=%B $commit)
 
-        if echo "$message" | grep -q "BREAKING CHANGE"; then
+        if echo "$message" | grep -q "^BREAKING CHANGE"; then
             INCREMENT_MAJOR=true
         #check if thers is a '!' before the ':' in the commit message
         elif echo "$message" | grep -qE "^[a-zA-Z]+!:"; then
