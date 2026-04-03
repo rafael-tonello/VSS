@@ -50,7 +50,7 @@
             fi
         elif [ "$debugMode" == "--debug" ]; then
             echo building 'debug version...'
-            go build -o ./build/vss -ldflags="-s -w" -gcflags="all=-N -l" ./main.go 2> /tmp/err.log
+            go build -o ./build/vss -gcflags="all=-N -l" ./main.go 2> /tmp/err.log
             if [ $? -ne 0 ]; then
                 misc.PrintError "Build failed: $(cat /tmp/err.log)\n"
                 return 1
