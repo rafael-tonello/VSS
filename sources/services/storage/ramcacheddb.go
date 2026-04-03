@@ -136,6 +136,7 @@ func (r *RamCachedDB) scrollTree(name string, curr *ramNode, readOnly bool) *ram
 				parent:       curr,
 				childs:       make(map[string]*ramNode),
 				value:        misc.NewEmptyDynamicVar(),
+				tags:         make(map[string]any),
 			}
 
 			//if curr.fullName != "" {
