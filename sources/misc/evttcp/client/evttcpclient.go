@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"strconv"
+	"sync"
 	"syscall"
 )
 
@@ -14,6 +15,8 @@ type TCPClient struct {
 	OnConnect    func()
 	OnDisconnect func()
 	con          net.Conn
+
+	sendingMutex sync.Mutex
 
 	Tags map[string]string
 }
@@ -48,6 +51,9 @@ func (this *TCPClient) SendString(data string) error {
 
 // send data to server
 func (this *TCPClient) Send(data []byte) error {
+	this.sendingMutex.Lock()
+	defer this.sendingMutex.Unlock()
+
 	if this.con == nil {
 		return errors.New("connection is not stablished")
 	} else {
