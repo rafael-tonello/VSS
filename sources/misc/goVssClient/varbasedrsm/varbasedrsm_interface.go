@@ -86,6 +86,7 @@ func (instance *Var) Lock(timeoutMs int) error {
 func (instance *Var) Unlock() error {
 	return instance.controller.Unlock(instance.Name)
 }
+
 func (instance *Var) Subscribe(callback func(misc.DynamicVar)) (int, error) {
 	subId, err := instance.controller.Subscribe(instance.Name, func(varName string, newValue misc.DynamicVar) {
 		callback(newValue)
