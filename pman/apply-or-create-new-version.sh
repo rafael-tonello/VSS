@@ -56,6 +56,13 @@ tryCreateVersion(){
     INCREMENT_MINOR=false
     INCREMENT_PATCH=false
 
+    #check if ther eis any tag in the project
+    if [ -z "$lastTag" ]; then
+        _error="No tags found in the repository, cannot create a new version based on commits. Please specify a version number manually."
+        _r=""
+        return 1
+    fi
+
     #scrolls commits from lastVersion to the last one
     local commits=$(git log --pretty=format:"%H" "$lastTag"..HEAD)
     for commit in $commits; do
