@@ -1,29 +1,37 @@
 {
-  "name": "VarStreamServer (Go + CGO)",
+  "name": "VarStreamServer",
+  "workspaceFolder": "/workspaces/VarStreamServer",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/VarStreamServer,type=bind,consistency=cached",
   "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
-  "remoteUser": "vscode",
-  "containerEnv": {
-    "CGO_ENABLED": "1",
-    "GOTOOLCHAIN": "auto"
+    "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
       "extensions": [
-        "golang.go",
-        "ms-vscode.cpptools"
+        "golang.Go",
+        "ms-vscode.cpptools",
+        "julynx.project-actions",
+        "pavelkhabusov.commands-extension",
+        "maptz.regionfolder",
+        "arturock.gitstash"
       ],
       "settings": {
         "go.useLanguageServer": true,
         "go.toolsManagement.autoUpdate": true,
-        "go.testFlags": [
-          "-v"
-        ]
+        "go.formatTool": "gofmt",
+        "go.lintTool": "golint",
+        "project-actions.configFileName": ".vscode/project-actions.json",
+        "commandsExtension.configFile": ".vscode/commands-list.json"
       }
     }
   },
-  "postCreateCommand": "go mod download && go version && g++ --version",
-  "postStartCommand": "sh -lc \"git config --global --add safe.directory '${containerWorkspaceFolder}'\""
+  "containerEnv": {
+    "CGO_ENABLED": "1"
+  },
+  "forwardPorts": [
+    5032,
+    5024
+  ],
+  "postCreateCommand": "bash -lc 'cd /workspaces/VarStreamServer && go mod download'",
+  "remoteUser": "root"
 }

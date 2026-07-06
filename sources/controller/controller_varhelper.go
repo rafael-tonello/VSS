@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"rtonello/vss/sources/misc"
 	"rtonello/vss/sources/services/storage"
@@ -334,6 +333,5 @@ func (c *ControllerVarHelper) ForeachObservation(f func(obsID ObservationID, cli
 }
 
 func (c *ControllerVarHelper) DeleteValue() {
-	fmt.Println("Deleting var:", c.name)
 	c.db.DeleteValue(c.name, false)
 }

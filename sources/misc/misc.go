@@ -19,6 +19,17 @@ func GetOnly(source string, validChars string) string {
 	return result
 }
 
+func SeparateKeyAndValue(keyValuePair string, possibleCharSeps string) (string, string) {
+
+	for _, char := range possibleCharSeps {
+		if strings.Contains(keyValuePair, string(char)) {
+			after, before, _ := strings.Cut(keyValuePair, string(char))
+			return after, before
+		}
+	}
+	return keyValuePair, ""
+}
+
 // #region terminal utils {
 func executeCommandAndGetOutput(command string, args ...string) (string, error) {
 	cmd := exec.Command(command, args...)

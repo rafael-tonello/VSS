@@ -6,10 +6,12 @@ import (
 	"sync"
 	"time"
 
+	"encoding/json"
+
 	"rtonello/vss/sources/controller"
 	"rtonello/vss/sources/misc"
+	tcpserver "rtonello/vss/sources/misc/evttcp/server"
 	"rtonello/vss/sources/misc/logger"
-	tcpserver "rtonello/vss/sources/misc/tcpserver"
 	// storage removed: VSTP must use controller API only
 )
 
@@ -22,27 +24,37 @@ const (
 	TOTAL_VARIABLES_ALREADY_BEING_OBSERVED = "aoc"
 	RESPONSE_BEGIN                         = "beginresponse"
 	RESPONSE_END                           = "endresponse"
-	SET_VAR                                = "set"
-	DELETE_VAR                             = "delete"
-	DELETE_VAR_RESULT                      = "deleteresult"
-	GET_VAR                                = "get"
-	GET_VAR_RESPONSE                       = "varvalue"
-	SUBSCRIBE_VAR                          = "subscribe"
-	UNSUBSCRIBE_VAR                        = "unsubscribe"
-	VAR_CHANGED                            = "varchanged"
-	GET_CHILDS                             = "getchilds"
-	GET_CHILDS_RESPONSE                    = "childs"
-	LOCK_VAR                               = "lock"
-	UNLOCK_VAR                             = "unlock"
-	LOCK_VAR_RESULT                        = "lockresult"
-	UNLOCK_VAR_DONE                        = "unlockdone"
-	SERVER_BEGIN_HEADERS                   = "beginserverheaders"
-	SERVER_END_HEADERS                     = "endserverheaders"
-	HELP                                   = "help"
-	SET_TELNET_SESSION                     = "telnet"
-	CHECK_VAR_LOCK_STATUS                  = "lockstatus"
-	CHECK_VAR_LOCK_STATUS_RESULT           = "lockstatusresult"
-	ERROR                                  = "error"
+
+	SET_VAR          = "set"
+	DELETE_VAR       = "delete"
+	GET_VAR          = "get"
+	GET_VAR_RESPONSE = "varvalue"
+
+	SET_JSON_VARS = "setjson"
+
+	TRANSACION_BEGIN          = "begintransaction"
+	TRANSACTION_SET_VAR       = "transactionset"
+	TRANSACTION_DELETE_VAR    = "transactiondelete"
+	TRANSACTION_SET_JSON_VARS = "transactionsetjson"
+	TRANSACTION_COMMIT        = "committransaction"
+	TRANSACTION_ROLLBACK      = "rollbacktransaction"
+
+	SUBSCRIBE_VAR                = "subscribe"
+	UNSUBSCRIBE_VAR              = "unsubscribe"
+	VAR_CHANGED                  = "varchanged"
+	GET_CHILDS                   = "getchilds"
+	GET_CHILDS_RESPONSE          = "childs"
+	LOCK_VAR                     = "lock"
+	UNLOCK_VAR                   = "unlock"
+	UNLOCK_VAR_DONE              = "unlockdone"
+	SERVER_BEGIN_HEADERS         = "beginserverheaders"
+	SERVER_END_HEADERS           = "endserverheaders"
+	HELP                         = "help"
+	SET_TELNET_SESSION           = "telnet"
+	CHECK_VAR_LOCK_STATUS        = "lockstatus"
+	CHECK_VAR_LOCK_STATUS_RESULT = "lockstatusresult"
+	ERROR                        = "error"
+	SUCESS                       = "success"
 )
 
 // VSTP is a text protocol API implementation (a Go port of the C++ VSTP API).
@@ -160,17 +172,17 @@ func NewVSTP(port int, ctrl controller.IController, logger logger.ILogger) (*VST
 }
 
 func (v *VSTP) sentInitialHeaders(cli tcpserver.ITCPClient, uid string) {
-	v.protocolWrite(cli, SERVER_BEGIN_HEADERS, "")
+	v.protocolWrite(cli, SERVER_BEGIN_HEADERS, "", "")
 
 	// minimal info: protocol and system version if controller available
-	v.protocolWrite(cli, SEND_SERVER_INFO_AND_CONFS, "PROTOCOL VERSION=1.2.0")
+	v.protocolWrite(cli, SEND_SERVER_INFO_AND_CONFS, "", "PROTOCOL VERSION=2.0.0")
 	if v.ctrl != nil {
-		v.protocolWrite(cli, SEND_SERVER_INFO_AND_CONFS, "VSS VERSION="+v.ctrl.GetSystemVersion())
+		v.protocolWrite(cli, SEND_SERVER_INFO_AND_CONFS, "", "VSS VERSION="+v.ctrl.GetSystemVersion())
 	}
 
-	v.protocolWrite(cli, SUGGEST_NEW_CLI_ID, uid)
+	v.protocolWrite(cli, SUGGEST_NEW_CLI_ID, "", uid)
 
-	v.protocolWrite(cli, SERVER_END_HEADERS, "")
+	v.protocolWrite(cli, SERVER_END_HEADERS, "", "")
 }
 
 // ApiInterface implementation -------------------------------------------------
@@ -208,7 +220,7 @@ func (v *VSTP) NotifyClient(clientId string, varsAndValues []misc.Tuple[string])
 		}
 		toSend := t.At(0) + metaStr + "=" + t.At(2)
 
-		err := v.protocolWrite(cli, VAR_CHANGED, toSend)
+		err := v.protocolWrite(cli, VAR_CHANGED, "", toSend)
 		if err != nil {
 			v.log.Error("Failed to send VAR_CHANGED to client:", err)
 			return false
@@ -218,7 +230,11 @@ func (v *VSTP) NotifyClient(clientId string, varsAndValues []misc.Tuple[string])
 }
 
 // Helpers ---------------------------------------------------------------------
-func (v *VSTP) protocolWrite(cli tcpserver.ITCPClient, cmd, data string) error {
+func (v *VSTP) protocolWrite(cli tcpserver.ITCPClient, cmd, cmdId, data string) error {
+	if cmdId != "" {
+		cmd = cmd + "(" + cmdId + ")"
+	}
+
 	buf := cmd + ":" + data + "\n"
 	//cliId := v.clientsByTcpCli[cli]
 	//v.log.Debug("VSTP protocolWrite sending to " + cliId + ": " + buf)
@@ -228,10 +244,17 @@ func (v *VSTP) protocolWrite(cli tcpserver.ITCPClient, cmd, data string) error {
 
 // processReceivedMessage parses and executes the protocol command
 func (v *VSTP) processReceivedMessage(cli tcpserver.ITCPClient, message string) {
-	// message form: command:payload
-	cmd, payload := separateKeyAndValue(message)
+	// message form: command(id):payload
+	cmd, cmdId, payload := separateCommandIdAndPayload(message)
 	cmd = strings.TrimSpace(cmd)
 	payload = strings.TrimSpace(payload)
+
+	if v.ctrl == nil {
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, cmd)
+		v.protocolWrite(cli, ERROR, cmdId, "vss error: no controller available")
+		v.protocolWrite(cli, RESPONSE_END, cmdId, cmd)
+		return
+	}
 
 	switch cmd {
 	case SET_VAR:
@@ -239,81 +262,74 @@ func (v *VSTP) processReceivedMessage(cli tcpserver.ITCPClient, message string) 
 		name, val := separateKeyAndValue(payload)
 		if name != "" {
 			// use controller to set the variable and wait for result
-			if v.ctrl != nil {
-				err := <-v.ctrl.SetVar(name, misc.NewDynamicVar(val))
-				v.protocolWrite(cli, RESPONSE_BEGIN, SET_VAR+":"+payload)
-				if err != nil {
-					v.protocolWrite(cli, ERROR, "set error: "+err.Error())
-				}
-				v.protocolWrite(cli, RESPONSE_END, SET_VAR+":"+payload)
+			err := <-v.ctrl.SetVar(name, misc.NewDynamicVar(val))
+			v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_VAR)
+			if err != nil {
+				v.protocolWrite(cli, ERROR, cmdId, "error: set error: "+err.Error())
+			} else {
+				v.protocolWrite(cli, SUCESS, cmdId, "")
 			}
+			v.protocolWrite(cli, RESPONSE_END, cmdId, SET_VAR)
 		} else {
-			v.protocolWrite(cli, RESPONSE_BEGIN, SET_VAR+":"+payload)
-			v.protocolWrite(cli, ERROR, "set error: invalid variable name")
-			v.protocolWrite(cli, RESPONSE_END, SET_VAR+":"+payload)
+			v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_VAR)
+			v.protocolWrite(cli, ERROR, cmdId, "set error: invalid variable name")
+			v.protocolWrite(cli, RESPONSE_END, cmdId, SET_VAR)
 		}
 	case DELETE_VAR:
 		name := payload
-		if v.ctrl != nil {
-			err := <-v.ctrl.DelVar(name)
-			v.protocolWrite(cli, RESPONSE_BEGIN, DELETE_VAR+":"+payload)
-			if err != nil {
-				v.protocolWrite(cli, DELETE_VAR_RESULT, name+"=failure:"+err.Error())
-			} else {
-				v.protocolWrite(cli, DELETE_VAR_RESULT, name+"=success")
-			}
-			v.protocolWrite(cli, RESPONSE_END, DELETE_VAR+":"+payload)
+		err := <-v.ctrl.DelVar(name)
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, DELETE_VAR)
+		if err != nil {
+			v.protocolWrite(cli, ERROR, cmdId, err.Error())
+		} else {
+			v.protocolWrite(cli, SUCESS, cmdId, "")
 		}
+		v.protocolWrite(cli, RESPONSE_END, cmdId, DELETE_VAR)
 	case GET_VAR:
 		name := payload
 		// read value(s) and reply
-		if v.ctrl != nil {
-			res := <-v.ctrl.GetVars(name, misc.NewDynamicVar(""))
-			v.protocolWrite(cli, RESPONSE_BEGIN, GET_VAR+":"+name)
-			if res.Err != nil {
-				v.protocolWrite(cli, ERROR, "get error: "+res.Err.Error())
-			} else {
-				for _, tup := range res.Values {
-					nameDV := tup.At(0)
-					valDV := tup.At(1)
-					nameStr := (&nameDV).GetString()
-					valStr := (&valDV).GetString()
-					v.protocolWrite(cli, GET_VAR_RESPONSE, nameStr+"="+valStr)
-				}
+		res := <-v.ctrl.GetVars(name, misc.NewDynamicVar(""))
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, GET_VAR)
+		if res.Err != nil {
+			v.protocolWrite(cli, ERROR, cmdId, "get error: "+res.Err.Error())
+		} else {
+			for _, tup := range res.Values {
+				nameDV := tup.At(0)
+				valDV := tup.At(1)
+				nameStr := (&nameDV).GetString()
+				valStr := (&valDV).GetString()
+				v.protocolWrite(cli, GET_VAR_RESPONSE, cmdId, nameStr+"="+valStr)
 			}
-			v.protocolWrite(cli, RESPONSE_END, GET_VAR+":"+name)
 		}
+		v.protocolWrite(cli, RESPONSE_END, cmdId, GET_VAR)
 	case SUBSCRIBE_VAR:
 		// payload may contain metadata like name(meta)
 		name, meta := separateNameAndMetadata(payload)
 		// register observation on controller
-		if v.ctrl != nil {
-			// we need a client id: use the secondary index for O(1) lookup
-			v.clientsLock.Lock()
-			cid, ok := v.clientsByTcpCli[cli]
-			if !ok || cid == "" {
-				cid = strconv.FormatInt(time.Now().UnixNano(), 10)
-				v.clientsById[cid] = cli
-				v.clientsByTcpCli[cli] = cid
-			}
-			v.clientsLock.Unlock()
-			v.protocolWrite(cli, RESPONSE_BEGIN, SUBSCRIBE_VAR+":"+payload)
-			v.ctrl.ObserveVar(name, cid, meta, v)
-			v.protocolWrite(cli, RESPONSE_END, SUBSCRIBE_VAR+":"+payload)
-			v.log.Info("Client subscribed to variable: " + name + " (metadata: " + meta + ")")
+		// we need a client id: use the secondary index for O(1) lookup
+		v.clientsLock.Lock()
+		cid, ok := v.clientsByTcpCli[cli]
+		if !ok || cid == "" {
+			cid = strconv.FormatInt(time.Now().UnixNano(), 10)
+			v.clientsById[cid] = cli
+			v.clientsByTcpCli[cli] = cid
 		}
+		v.clientsLock.Unlock()
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SUBSCRIBE_VAR)
+		v.ctrl.ObserveVar(name, cid, meta, v)
+		v.protocolWrite(cli, RESPONSE_END, cmdId, SUBSCRIBE_VAR)
+		v.log.Info("Client subscribed to variable: " + name + " (metadata: " + meta + ")")
 	case UNSUBSCRIBE_VAR:
 		name, meta := separateNameAndMetadata(payload)
-		if v.ctrl != nil {
-			// find client id via secondary index
-			v.clientsLock.RLock()
-			cid, ok := v.clientsByTcpCli[cli]
-			v.clientsLock.RUnlock()
-			if ok && cid != "" {
-				v.protocolWrite(cli, RESPONSE_BEGIN, UNSUBSCRIBE_VAR+":"+payload)
-				v.ctrl.StopObservingVar(name, cid, meta, v)
-				v.protocolWrite(cli, RESPONSE_END, UNSUBSCRIBE_VAR+":"+payload)
-			}
+		// find client id via secondary index
+		v.clientsLock.RLock()
+		cid, ok := v.clientsByTcpCli[cli]
+		v.clientsLock.RUnlock()
+		if ok && cid != "" {
+			v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, UNSUBSCRIBE_VAR)
+			v.ctrl.StopObservingVar(name, cid, meta, v)
+			v.protocolWrite(cli, SUCESS, cmdId, "")
+			v.protocolWrite(cli, RESPONSE_END, cmdId, UNSUBSCRIBE_VAR)
 		}
 	case LOCK_VAR:
 		// payload: var[=timeout]
@@ -324,31 +340,31 @@ func (v *VSTP) processReceivedMessage(cli tcpserver.ITCPClient, message string) 
 				timeout = uint(t)
 			}
 		}
-		if v.ctrl != nil {
-			err := <-v.ctrl.LockVar(name, timeout)
-			v.protocolWrite(cli, RESPONSE_BEGIN, LOCK_VAR+":"+payload)
-			if err != nil {
-				v.protocolWrite(cli, LOCK_VAR_RESULT, name+"=failure:"+err.Error())
-			} else {
-				v.protocolWrite(cli, LOCK_VAR_RESULT, name+"=success")
-			}
+
+		err := <-v.ctrl.LockVar(name, timeout)
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, LOCK_VAR)
+		if err != nil {
+			v.protocolWrite(cli, ERROR, cmdId, err.Error())
 		} else {
-			v.protocolWrite(cli, RESPONSE_BEGIN, LOCK_VAR+":"+payload)
-			v.protocolWrite(cli, LOCK_VAR_RESULT, name+"=success")
+			v.protocolWrite(cli, SUCESS, cmdId, "")
 		}
-		v.protocolWrite(cli, RESPONSE_END, LOCK_VAR+":"+payload)
+		v.protocolWrite(cli, RESPONSE_END, cmdId, LOCK_VAR)
 	case UNLOCK_VAR:
 		name, _ := separateKeyAndValue(payload)
 		if v.ctrl != nil {
 			<-v.ctrl.UnlockVar(name)
 		}
-		v.protocolWrite(cli, RESPONSE_BEGIN, UNLOCK_VAR+":"+payload)
-		v.protocolWrite(cli, UNLOCK_VAR_DONE, name)
-		v.protocolWrite(cli, RESPONSE_END, UNLOCK_VAR+":"+payload)
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, UNLOCK_VAR)
+		v.protocolWrite(cli, UNLOCK_VAR_DONE, cmdId, name)
+		v.protocolWrite(cli, RESPONSE_END, cmdId, UNLOCK_VAR)
+
+	case SET_JSON_VARS:
+		v.setJsonVars(cli, cmdId, payload)
+
 	case PING:
-		v.protocolWrite(cli, RESPONSE_BEGIN, PING+":"+payload)
-		v.protocolWrite(cli, PONG, "")
-		v.protocolWrite(cli, RESPONSE_END, PING+":"+payload)
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, PING)
+		v.protocolWrite(cli, PONG, cmdId, "")
+		v.protocolWrite(cli, RESPONSE_END, cmdId, PING)
 
 	// client sends its requested id to resume a previous session
 	case CHANGE_OR_CONFIRM_CLI_ID:
@@ -369,50 +385,106 @@ func (v *VSTP) processReceivedMessage(cli tcpserver.ITCPClient, message string) 
 			v.clientsLock.Unlock()
 		}
 		// notify controller that client connected (so it can re-send observing vars)
-		if v.ctrl != nil {
-			_, observing := v.ctrl.ClientConnected(newId, v)
-			// send total observed count
-			v.protocolWrite(cli, RESPONSE_BEGIN, CHANGE_OR_CONFIRM_CLI_ID+":"+payload)
-			v.protocolWrite(cli, TOTAL_VARIABLES_ALREADY_BEING_OBSERVED, strconv.Itoa(observing))
-			v.protocolWrite(cli, RESPONSE_END, CHANGE_OR_CONFIRM_CLI_ID+":"+payload)
-		}
+		_, observing := v.ctrl.ClientConnected(newId, v)
+		// send total observed count
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, CHANGE_OR_CONFIRM_CLI_ID)
+		v.protocolWrite(cli, TOTAL_VARIABLES_ALREADY_BEING_OBSERVED, cmdId, strconv.Itoa(observing))
+		v.protocolWrite(cli, RESPONSE_END, cmdId, CHANGE_OR_CONFIRM_CLI_ID)
 
 	case GET_CHILDS:
 		// payload is parent var
 		parent := payload
-		if v.ctrl != nil {
-			childs := <-v.ctrl.GetChildsOfVar(parent)
-			// join by comma
-			resp := strings.Join(childs, ",")
-			v.protocolWrite(cli, RESPONSE_BEGIN, GET_CHILDS+":"+payload)
-			v.protocolWrite(cli, GET_CHILDS_RESPONSE, resp)
-			v.protocolWrite(cli, RESPONSE_END, GET_CHILDS+":"+payload)
-		}
+		childs := <-v.ctrl.GetChildsOfVar(parent)
+		// join by comma
+		resp := strings.Join(childs, ",")
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, GET_CHILDS)
+		v.protocolWrite(cli, GET_CHILDS_RESPONSE, cmdId, resp)
+		v.protocolWrite(cli, RESPONSE_END, cmdId, GET_CHILDS)
 
 	case CHECK_VAR_LOCK_STATUS:
 		name := payload
-		if v.ctrl != nil {
-			locked := <-v.ctrl.IsVarLocked(name)
-			status := "unlocked"
-			if locked {
-				status = "locked"
-			}
-			v.protocolWrite(cli, CHECK_VAR_LOCK_STATUS_RESULT, name+"="+status)
+		locked := <-v.ctrl.IsVarLocked(name)
+		status := "unlocked"
+		if locked {
+			status = "locked"
 		}
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, CHECK_VAR_LOCK_STATUS)
+		v.protocolWrite(cli, CHECK_VAR_LOCK_STATUS_RESULT, cmdId, name+"="+status)
+		v.protocolWrite(cli, RESPONSE_END, cmdId, CHECK_VAR_LOCK_STATUS)
 	default:
 		// ignore unknown
 		v.log.Info("Unknown VSTP command received: " + cmd)
 	}
 }
 
+func (v *VSTP) setJsonVars(cli tcpserver.ITCPClient, cmdId string, payload string) {
+	if v.ctrl == nil {
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_JSON_VARS)
+		v.protocolWrite(cli, ERROR, cmdId, "vss error error: no controller available")
+		v.protocolWrite(cli, RESPONSE_END, cmdId, SET_JSON_VARS)
+		return
+	}
+
+	parent, jsonStr := separateKeyAndValue(payload)
+	if parent == "" || jsonStr == "" {
+		v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_JSON_VARS)
+		v.protocolWrite(cli, ERROR, cmdId, "setjson error: invalid payload format, expected parent=json")
+		v.protocolWrite(cli, RESPONSE_END, cmdId, SET_JSON_VARS)
+		return
+	}
+
+	//parse the json using encoding/json
+	var data map[string]interface{}
+	json.Unmarshal([]byte(jsonStr), &data)
+
+	var toSet map[string]misc.DynamicVar = make(map[string]misc.DynamicVar)
+
+	//declare extractNames (used recursively to flatten the json into var names and values)
+	var extractNames func(parent string, data map[string]interface{})
+
+	extractNames = func(parent string, data map[string]interface{}) {
+		for k, v := range data {
+			name := parent + "." + k
+			switch val := v.(type) {
+			case map[string]interface{}:
+				extractNames(name, val)
+			default:
+				toSet[name] = misc.NewDynamicVar(val)
+			}
+		}
+	}
+
+	extractNames(parent, data)
+
+	for name, val := range toSet {
+		err := <-v.ctrl.SetVar(name, val)
+		if err != nil {
+			v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_JSON_VARS)
+			v.protocolWrite(cli, ERROR, cmdId, "setjson error: "+err.Error())
+			v.protocolWrite(cli, RESPONSE_END, cmdId, SET_JSON_VARS)
+		}
+	}
+
+	v.protocolWrite(cli, RESPONSE_BEGIN, cmdId, SET_JSON_VARS)
+	v.protocolWrite(cli, SUCESS, cmdId, "")
+	v.protocolWrite(cli, RESPONSE_END, cmdId, SET_JSON_VARS)
+}
+
 // small helpers ---------------------------------------------------------------
 func separateKeyAndValue(s string) (string, string) {
 	for i := 0; i < len(s); i++ {
-		if strings.ContainsAny(string(s[i]), "=;:") {
+		if strings.ContainsAny(string(s[i]), "=;: ") {
 			return s[:i], s[i+1:]
 		}
 	}
 	return s, ""
+}
+
+func separateCommandIdAndPayload(s string) (string, string, string) {
+	commandWithId, payload := separateKeyAndValue(s)
+	command, id := separateNameAndMetadata(commandWithId)
+
+	return command, id, payload
 }
 
 func separateNameAndMetadata(original string) (string, string) {

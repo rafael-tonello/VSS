@@ -1,7 +1,6 @@
 package extensions
 
 import (
-	"rtonello/vss/sources/controller"
 	"rtonello/vss/sources/misc"
 	"rtonello/vss/sources/services/apis"
 )
@@ -142,7 +141,7 @@ type IExtension interface {
 
 	//could change the return value
 	//this will not be called if BeforeGetChildsOfVar forces return (by return errors or using WhatDoReturn == WhatDoReturnFromIntercepted)
-	AfterGetChildsOfVar(parentName string, queryHeaders map[string]string, returnValue controller.GetChildsOfVarResult) chan ExtensionsGetChildsResult
+	AfterGetChildsOfVar(parentName string, queryHeaders map[string]string, returnValue ExtensionsGetChildsResult) chan ExtensionsGetChildsResult
 
 	//could change parameters and do a custom return
 	BeforeLockVar(varName string, timeoutMs uint, queryHeaders map[string]string) chan ExtensionsLockVarResult

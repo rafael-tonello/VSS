@@ -17,29 +17,29 @@ import (
 	"rtonello/vss/sources/misc"
 )
 
-// HttpAPI is a lightweight Go port of the original C++ Http API. It implements
+// HTTPAPI is a lightweight Go port of the original C++ Http API. It implements
 // apis.IApi so it can be registered on the controller. It exposes simple
 // REST endpoints for GET/POST/DELETE and a WebSocket endpoint for subscriptions.
-type HttpAPI struct {
+type HTTPAPI struct {
 	port       int
 	ctrl       controller.IController
-	apiId      string
+	apiID      string
 	upgrader   websocket.Upgrader
 	clients    map[string]*websocket.Conn
-	connToId   map[*websocket.Conn]string
+	connToID   map[*websocket.Conn]string
 	clientsMtx sync.Mutex
 }
 
 // New creates and starts the HTTP API on the given port and registers the API
 // with the controller (calls ApiStarted).
-func New(port int, ctrl controller.IController) (*HttpAPI, error) {
-	h := &HttpAPI{
+func New(port int, ctrl controller.IController) (*HTTPAPI, error) {
+	h := &HTTPAPI{
 		port:     port,
 		ctrl:     ctrl,
-		apiId:    "HTTPAPI",
+		apiID:    "HTTPAPI",
 		upgrader: websocket.Upgrader{},
 		clients:  make(map[string]*websocket.Conn),
-		connToId: make(map[*websocket.Conn]string),
+		connToID: make(map[*websocket.Conn]string),
 	}
 
 	// register with controller
@@ -58,23 +58,24 @@ func New(port int, ctrl controller.IController) (*HttpAPI, error) {
 	return h, nil
 }
 
-// apis.IApi implementation --------------------------------------------------
-func (h *HttpAPI) GetApiId() string {
-	return h.apiId
+// GetAPIID returns the API identifier.
+func (h *HTTPAPI) GetAPIID() string {
+	return h.apiID
 }
 
-func (h *HttpAPI) CheckAlive(clientId string) bool {
+// CheckAlive checks if a client with the given ID is currently connected.
+func (h *HTTPAPI) CheckAlive(clientID string) bool {
 	h.clientsMtx.Lock()
 	defer h.clientsMtx.Unlock()
-	_, ok := h.clients[clientId]
+	_, ok := h.clients[clientID]
 	return ok
 }
 
 // NotifyClient sends vars changes to the websocket client. Returns true when
 // the client appears to be alive and the send succeeded.
-func (h *HttpAPI) NotifyClient(clientId string, varsAndValues []misc.Tuple[string]) bool {
+func (h *HTTPAPI) NotifyClient(clientID string, varsAndValues []misc.Tuple[string]) bool {
 	h.clientsMtx.Lock()
-	conn, ok := h.clients[clientId]
+	conn, ok := h.clients[clientID]
 	h.clientsMtx.Unlock()
 	if !ok || conn == nil {
 		return false
@@ -95,9 +96,9 @@ func (h *HttpAPI) NotifyClient(clientId string, varsAndValues []misc.Tuple[strin
 	if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
 		// remove dead connection
 		h.clientsMtx.Lock()
-		if cid, ok := h.connToId[conn]; ok {
+		if cid, ok := h.connToID[conn]; ok {
 			delete(h.clients, cid)
-			delete(h.connToId, conn)
+			delete(h.connToID, conn)
 		}
 		h.clientsMtx.Unlock()
 		return false
@@ -109,7 +110,7 @@ func (h *HttpAPI) NotifyClient(clientId string, varsAndValues []misc.Tuple[strin
 // operations. Example: GET /a/b/c -> get var "a.b.c"; POST /a/b/c -> set var
 // "a.b.c"; DELETE /a/b/c -> delete var "a.b.c"; WebSocket upgrade to the
 // same path will subscribe to that var.
-func (h *HttpAPI) handlePath(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPAPI) handlePath(w http.ResponseWriter, r *http.Request) {
 	// Derive var name from path
 	// strip leading '/'
 	path := strings.TrimPrefix(r.URL.Path, "/")
@@ -133,19 +134,44 @@ func (h *HttpAPI) handlePath(w http.ResponseWriter, r *http.Request) {
 		h.handlePostByName(w, r, varName)
 	case http.MethodDelete:
 		h.handleDeleteByName(w, r, varName)
+	case "LOCK":
+		h.handleLockByName(w, r, varName)
+	case "UNLOCK":
+		h.handleUnlockByName(w, r, varName)
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 }
 
-func (h *HttpAPI) handleGetByName(w http.ResponseWriter, r *http.Request, name string) {
+func (h *HTTPAPI) handleGetByName(w http.ResponseWriter, r *http.Request, name string) {
 	q := r.URL.Query()
 	exporter := strings.ToLower(q.Get("export"))
 	if exporter == "" {
 		exporter = "json"
+
+		//check the accept header
+		accept := r.Header.Get("Accept")
+		if strings.Contains(accept, "text/plain") {
+			exporter = "plain"
+		}
 	}
+
 	pretty := strings.ToLower(q.Get("pretty")) == "true"
 	full := strings.ToLower(q.Get("fullnames")) == "true"
+
+	//check if is a lock of unlock operations
+	if strings.ToLower(q.Get("action")) == "lock" {
+		//convert locktimeout query param to a header
+		if lockTimeout := q.Get("locktimeout"); lockTimeout != "" {
+			r.Header.Set("Lock-Timeout", lockTimeout)
+		}
+		h.handleLockByName(w, r, name)
+		return
+
+	} else if strings.ToLower(q.Get("action")) == "unlock" {
+		h.handleUnlockByName(w, r, name)
+		return
+	}
 
 	res := <-h.ctrl.GetVars(name, misc.NewDynamicVar(""))
 	if res.Err != nil {
@@ -169,6 +195,9 @@ func (h *HttpAPI) handleGetByName(w http.ResponseWriter, r *http.Request, name s
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(strings.Join(lines, "\n")))
+		return
+	} else if exporter != "json" {
+		http.Error(w, "invalid export format (use json or plain)", http.StatusBadRequest)
 		return
 	}
 
@@ -249,7 +278,7 @@ func (h *HttpAPI) handleGetByName(w http.ResponseWriter, r *http.Request, name s
 	_, _ = w.Write(out)
 }
 
-func (h *HttpAPI) handlePostByName(w http.ResponseWriter, r *http.Request, name string) {
+func (h *HTTPAPI) handlePostByName(w http.ResponseWriter, r *http.Request, name string) {
 	// If Content-Type is application/json and body is an object, set multiple vars
 	ct := r.Header.Get("Content-Type")
 	if strings.Contains(ct, "application/json") {
@@ -278,7 +307,7 @@ func (h *HttpAPI) handlePostByName(w http.ResponseWriter, r *http.Request, name 
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (h *HttpAPI) setJson(parent string, obj map[string]interface{}) error {
+func (h *HTTPAPI) setJson(parent string, obj map[string]interface{}) error {
 	if parent != "" {
 		parent = parent + "."
 	}
@@ -305,7 +334,7 @@ func (h *HttpAPI) setJson(parent string, obj map[string]interface{}) error {
 	return nil
 }
 
-func (h *HttpAPI) handleDeleteByName(w http.ResponseWriter, r *http.Request, name string) {
+func (h *HTTPAPI) handleDeleteByName(w http.ResponseWriter, _ *http.Request, name string) {
 	if err := <-h.ctrl.DelVar(name); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -313,8 +342,46 @@ func (h *HttpAPI) handleDeleteByName(w http.ResponseWriter, r *http.Request, nam
 	w.WriteHeader(http.StatusNoContent)
 }
 
+func (h *HTTPAPI) handleLockByName(w http.ResponseWriter, r *http.Request, name string) {
+	lockTimeout := r.Header.Get("Lock-Timeout")
+	if lockTimeout == "" {
+		lockTimeout = "30" // default to 30 seconds
+	}
+	timeout, err := strconv.Atoi(lockTimeout)
+	if err != nil {
+		http.Error(w, "invalid Lock-Timeout value", http.StatusBadRequest)
+		return
+	}
+
+	if timeout < 1 {
+		http.Error(w, "Lock-Timeout must be greater than 0", http.StatusBadRequest)
+		return
+	}
+
+	err = <-h.ctrl.LockVar(name, uint(timeout*1000)) // convert to milliseconds
+	if err != nil {
+		if strings.Contains(err.Error(), "timeout") {
+			http.Error(w, err.Error(), http.StatusRequestTimeout)
+			return
+		}
+
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (h *HTTPAPI) handleUnlockByName(w http.ResponseWriter, _ *http.Request, name string) {
+	err := <-h.ctrl.UnlockVar(name)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
 // Websocket handling --------------------------------------------------------
-func (h *HttpAPI) handleWSForVar(w http.ResponseWriter, r *http.Request, varName string) {
+func (h *HTTPAPI) handleWSForVar(w http.ResponseWriter, r *http.Request, varName string) {
 	conn, err := h.upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		return
@@ -323,7 +390,7 @@ func (h *HttpAPI) handleWSForVar(w http.ResponseWriter, r *http.Request, varName
 	cid := strconv.FormatInt(time.Now().UnixNano(), 10)
 	h.clientsMtx.Lock()
 	h.clients[cid] = conn
-	h.connToId[conn] = cid
+	h.connToID[conn] = cid
 	h.clientsMtx.Unlock()
 
 	// notify controller about connection
@@ -361,7 +428,7 @@ func (h *HttpAPI) handleWSForVar(w http.ResponseWriter, r *http.Request, varName
 	// cleanup on disconnect
 	h.clientsMtx.Lock()
 	delete(h.clients, cid)
-	delete(h.connToId, conn)
+	delete(h.connToID, conn)
 	h.clientsMtx.Unlock()
 	conn.Close()
 }
@@ -392,9 +459,7 @@ func separateNameAndMetadata(original string) (string, string) {
 	if p := strings.IndexByte(original, '('); p >= 0 {
 		name := original[:p]
 		meta := original[p+1:]
-		if strings.HasSuffix(meta, ")") {
-			meta = meta[:len(meta)-1]
-		}
+		meta = strings.TrimSuffix(meta, ")")
 		return name, meta
 	}
 	return original, ""

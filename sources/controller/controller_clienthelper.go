@@ -92,7 +92,7 @@ func (h *ControllerClientHelper) initialize() {
 			h.db.Set("internal.clients.byId."+h.clientId, misc.NewDynamicVar(cnt))
 		}
 		if h.api != nil {
-			h.db.Set("internal.clients.byId."+h.clientId+".apiId", misc.NewDynamicVar(h.api.GetApiId()))
+			h.db.Set("internal.clients.byId."+h.clientId+".apiId", misc.NewDynamicVar(h.api.GetAPIID()))
 		}
 		h.UpdateLiveTime()
 	})
@@ -105,7 +105,7 @@ func currentTimeSeconds() int64 {
 func (h *ControllerClientHelper) SetControlledClientId(clientId string, apiId string) {
 	h.clientId = clientId
 	if h.api != nil {
-		h.db.Set("internal.clients.byId."+h.clientId+".apiId", misc.NewDynamicVar(h.api.GetApiId()))
+		h.db.Set("internal.clients.byId."+h.clientId+".apiId", misc.NewDynamicVar(h.api.GetAPIID()))
 	} else if apiId != "" {
 		h.db.Set("internal.clients.byId."+h.clientId+".apiId", misc.NewDynamicVar(apiId))
 	}
