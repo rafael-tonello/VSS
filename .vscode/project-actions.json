@@ -1,0 +1,10 @@
+{
+  "actions": [
+    {
+      "text": "⚙ Build",
+      "command": "./pman.sh build",
+      "tooltip": "Build the project",
+      "color": "#b0eb93"
+    }
+  ]
+}
