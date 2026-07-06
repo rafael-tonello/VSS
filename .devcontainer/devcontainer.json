@@ -1,0 +1,37 @@
+{
+  "name": "VarStreamServer",
+  "workspaceFolder": "/workspaces/VarStreamServer",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/VarStreamServer,type=bind,consistency=cached",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "ms-vscode.cpptools",
+        "julynx.project-actions",
+        "pavelkhabusov.commands-extension",
+        "maptz.regionfolder",
+        "arturock.gitstash"
+      ],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.toolsManagement.autoUpdate": true,
+        "go.formatTool": "gofmt",
+        "go.lintTool": "golint",
+        "project-actions.configFileName": ".vscode/project-actions.json",
+        "commandsExtension.configFile": ".vscode/commands-list.json"
+      }
+    }
+  },
+  "containerEnv": {
+    "CGO_ENABLED": "1"
+  },
+  "forwardPorts": [
+    5032,
+    5024
+  ],
+  "postCreateCommand": "bash -lc 'cd /workspaces/VarStreamServer && go mod download'",
+  "remoteUser": "root"
+}
