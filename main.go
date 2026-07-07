@@ -26,7 +26,7 @@ import (
 	httpapi "rtonello/vss/sources/services/apis/httpapi"
 )
 
-const INFO_VERSION = "2.0.0+Capella"
+const INFO_VERSION = "v2.3.0+Capella"
 
 func main() {
 

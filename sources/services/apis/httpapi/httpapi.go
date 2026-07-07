@@ -31,7 +31,7 @@ type HTTPAPI struct {
 }
 
 // New creates and starts the HTTP API on the given port and registers the API
-// with the controller (calls ApiStarted).
+// with the controller (calls APIStarted).
 func New(port int, ctrl controller.IController) (*HTTPAPI, error) {
 	h := &HTTPAPI{
 		port:     port,
@@ -44,7 +44,7 @@ func New(port int, ctrl controller.IController) (*HTTPAPI, error) {
 
 	// register with controller
 	if ctrl != nil {
-		ctrl.ApiStarted(h)
+		ctrl.APIStarted(h)
 	}
 
 	// routes: handle all paths so GET/POST/DELETE map directly to /path/to/var

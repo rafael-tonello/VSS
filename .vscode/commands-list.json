@@ -1,0 +1,10 @@
+{
+  "commands": [
+    {
+      "name": "build",
+      "command": "./pman.sh build",
+      "type": "terminal",
+      "group": "General"
+    }
+  ]
+}

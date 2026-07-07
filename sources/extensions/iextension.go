@@ -92,7 +92,7 @@ type ExtensionsStopObservingVarResult struct {
 	NewCustomIdsAndMetainfo string
 }
 
-type ExtensionsApiStartedResult struct {
+type ExtensionsAPIStartedResult struct {
 	WhatDo WhatDo
 	//if not nil, the function must return imediately with this error, event if WhatDo is WhatDoContinue
 	Err error
@@ -179,11 +179,11 @@ type IExtension interface {
 	AfterStopObservingVar(varName, clientId, customIdsAndMetainfo string, api apis.IApi, queryHeaders map[string]string) chan ExtensionsStopObservingVarResult
 
 	//could change parameters and do a custom return
-	BeforeApiStarted(api apis.IApi) chan ExtensionsApiStartedResult
+	BeforeAPIStarted(api apis.IApi) chan ExtensionsAPIStartedResult
 
 	//could change the return value
-	//this will not be called if BeforeApiStarted forces return (by return errors or using WhatDoReturn == WhatDoReturnFromIntercepted)
-	AfterApiStarted(api apis.IApi) chan ExtensionsApiStartedResult
+	//this will not be called if BeforeAPIStarted forces return (by return errors or using WhatDoReturn == WhatDoReturnFromIntercepted)
+	AfterAPIStarted(api apis.IApi) chan ExtensionsAPIStartedResult
 
 	//could change parameters and do a custom return
 	BeforeClientConnected(clientId string, api apis.IApi, queryHeaders map[string]string) chan ExtensionsClientConnectedResult

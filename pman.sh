@@ -55,7 +55,7 @@
 
     new_version_helpText="Apply or create a new version. This function, besides be available as a project command, is called automatically after merging or commiting to main."
     new-version(){
-        source $projectRootPath/pman/apply-or-create-new-version.sh "$@"
+        source "$projectRootPath/pman/apply-or-create-new-version.sh" "$@"
         return $?
     }
 
@@ -260,7 +260,6 @@
             echo ""
             echo "Available commands:"
             for cmd in $(compgen -A function); do
-
                 local helpVar="${cmd}_helpText"
                 #replace '-' by '_'
                 helpVar="${helpVar//-/_}"
@@ -572,7 +571,7 @@
     fi
 
     #replace "-" with "_" in funcName
-    funcName="${funcName//-/_}"
+    #funcName="${funcName//-/_}"
 
     #check if function exists
     if declare -f "$funcName" > /dev/null; then

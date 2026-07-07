@@ -45,3 +45,4 @@ tests/makefile
 .shu
 
 *.log
+.pman

@@ -72,7 +72,7 @@ type VSTP struct {
 }
 
 // NewVSTP constructs and starts a VSTP server on the given port and registers
-// itself on the provided controller (calls ApiStarted).
+// itself on the provided controller (calls APIStarted).
 func NewVSTP(port int, ctrl controller.IController, logger logger.ILogger) (*VSTP, error) {
 	v := &VSTP{
 		ctrl:               ctrl,
@@ -165,7 +165,7 @@ func NewVSTP(port int, ctrl controller.IController, logger logger.ILogger) (*VST
 
 	// register to controller
 	if ctrl != nil {
-		ctrl.ApiStarted(v)
+		ctrl.APIStarted(v)
 	}
 
 	return v, nil
@@ -186,7 +186,7 @@ func (v *VSTP) sentInitialHeaders(cli tcpserver.ITCPClient, uid string) {
 }
 
 // ApiInterface implementation -------------------------------------------------
-func (v *VSTP) GetApiId() string {
+func (v *VSTP) GetAPIID() string {
 	return v.apiId
 }
 

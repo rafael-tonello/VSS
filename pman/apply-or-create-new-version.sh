@@ -3,8 +3,8 @@
 #this script does the following:
 #1. Check if there are pending git changes, if there are, the scripts will fail
 #3. Execute git checkout develop
-#4. change the version number in the main.cpp file (looks for the line starting with 'string INFO_VERSION' and change it to 'string INFO_VERSION = "<version>"')
-#5. execute git add ./sources/main.cpp
+#4. change the version number in the main.go file (looks for the line starting with 'string INFO_VERSION' and change it to 'string INFO_VERSION = "<version>"')
+#5. execute git add ./main.go
 #6. execute git commit -m "Changes version number to <version>"
 #7. execute git push origin develop
 #8. execute git checkout main
@@ -183,10 +183,10 @@ main(){
     git checkout develop
 
     #change version number
-    echo "Changing version number to $version in ./sources/main.cpp..."
+    echo "Changing version number to $version in ./main.go..."
 
     if [ $dryrun == false ]; then
-        sed -i "s/const INFO_VERSION = \".*\"/const INFO_VERSION = \"$version\"/g" ./sources/main.cpp
+        sed -i "s/const INFO_VERSION = \".*\"/const INFO_VERSION = \"$version\"/g" ./main.go
     fi
 
     #add commits since last tag to the CHANGELOG.md file
@@ -229,10 +229,10 @@ main(){
     echo "Adding changes to git..."
 
     if [ $dryrun == false ]; then
-        git add ./sources/main.cpp
+        git add ./main.go
         git add CHANGELOG.md
     else
-        echo "dry run: mimicking 'git add ./sources/main.cpp' and 'git add CHANGELOG.md'"
+        echo "dry run: mimicking 'git add ./main.go' and 'git add CHANGELOG.md'"
     fi
 
     #commit changes
