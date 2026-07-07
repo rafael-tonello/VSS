@@ -28,21 +28,22 @@ type IStorage interface {
 	Get(name string, defaultValue misc.DynamicVar) misc.DynamicVar
 
 	// GetChilds returns only immediate childs (not grandchildren). Each returned string
-	// should be the full key name for the child (same behavior as C++ version comment).
-	GetChilds(parentName string) []string
+	// should be the imediate key name for the child (not full key name).
+	GetChildNames(parentName string) []string
+
 	HasValue(name string) bool
 
 	// DeleteValue removes the named key. If deleteChildsInACascade is true, remove child keys too.
 	DeleteValue(name string, deleteChildsInACascade bool)
 
 	// ForEachChilds iterates immediate child keys and calls f(childFullName, value).
-	ForEachChilds(parentName string, f func(string, misc.DynamicVar))
+	//ForEachChilds(parentName string, f func(string, misc.DynamicVar))
 
 	// ForEachChildsParallel iterates immediate child keys and calls f concurrently.
 	// The concurrency parameter limits the number of worker goroutines (must be >= 1).
 	// It returns a channel that's closed when all executions are finished. Caller can optionally
 	// wait for completion by reading from the returned channel (e.g. <-done).
-	ForEachChildsParallel(parentName string, f func(string, misc.DynamicVar), concurrency int) <-chan struct{}
+	//ForEachChildsParallel(parentName string, f func(string, misc.DynamicVar), concurrency int) <-chan struct{}
 
 	Finalize()
 }

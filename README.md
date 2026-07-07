@@ -24,57 +24,58 @@
 - Use in IoT projects to manage device states and configurations.
 - Allow communication between applications (microservices, web apps, etc.).
 
+# Development and Deployment
+This project is set up for Dev Container workflow in VS Code.
 
-# Compiling and running
+DevContainer contains all dependencies and extensions needed for development (with vscode)
 
-## Shu managed project
-This project is managed by a commandline tool called Shu (https://github.com/rafael-tonello/SHU). Shu is a dependency manager and project automation tool that allow you to manage you project throught commands. Shu can also reacts to events in your project when commands are executed.
+## pman.sh script
 
-Here is a quick guide to install shu (when trying to install shu, it will ever inform what is mission in your system, but this is a shortcut to install it):
-  * Install curl
-  * Install unzip
-  * Install yq (wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
-  * Install Shu (curl -sSL https://raw.githubusercontent.com/rafael-tonello/SHU/main/src/tools/shu-install.sh | bash)
-
-after installing Shu, clone the VSS project and run the  command 'shu init' in the project folder. 
-Read the Shu output (mainly the red and yellow messages and mainly in the first time out shun 'shu init').
-
-Runnin 'shu --help -p' will list available commands in the project.
+This project includes a project management script, `pman.sh`, that have some useful commands for helping the development process. You can use it with `./pman.sh <command>`.
 
 
-### cloning and initializing the project
-```bash
-git clone  "http://vss_repo_path VSS"
-cd VSS
-shu init #shu restore also works
-shu --help -p
+The most important command of pman.sh is `init`. This command prepares the project for development (installing git hooks, restoring dependencies, etc.) and you should run it at least once. After that, you may want to run it again from time to time to make sure your project is in good shape.
+
+```shell
+./pman.sh init
 ```
 
-### building the project
+Run `./pman.sh --help` to see all available commands and their descriptions.
+
+## Steps for Developers: Opening, Building, and Deploying with VS Code
+If you want to contribute to the project, follow these steps to open, build, and deploy it:
+
+### 1) Open in VS Code Dev Container
+
+1. Open this folder in VS Code.
+2. Run **Dev Containers: Reopen in Container**.
+
+The container includes PlatformIO Core and installs the PlatformIO extension in VS Code.
+
+### 2) Run `./pman.sh init`
+This step is very important, as it restores the project dependencies and performs other setup tasks required for development.
+You can read more about `pman.sh` below.
+
+[Read more about `pman.sh`](#pman.sh-script).
+
+### 3) Build the Project
+
 ```bash
-shu build
+./pman.sh build
 ```
-The command above will build the project, generating the file ./build/vss. You can add the option '--debug' to generate debug symbols (for gdb).
 
-## building tests
-
-  ```bash
-  shu build --tests
-  ```
-  The command above will generate a binary named 'tests' in the folder ./tests/build. You can run this binary to run the tests. Tests are ever build with debug symbols.
+You can also use the vscode to build. Project is versioned with a .vscode folder.
 
 
 
+# Configuration source order
 
-  The comands above, if no error occurs, will generate a binary of the vss in the 'build' folder. The build folder will be populated with some aditional files that allow vss to run in a portable installation (more about installations modes will be discussed above).
+Vss can load configuration values from three sources: command line arguments, environment variables, and a configuration file. When the same setting is defined in more than one source, VSS uses the following priority order:
+1. Command line arguments (highest priority)
+2. Environment variables
+3. Configuration file (lowest priority)
 
-  Now, you can enter in the build folder and run the VSS.
-  ```bash
-  cd build
-  ./VarServer
-  ```
-
-  The VSS will startup and show some util information:
+read mode details in [Configuration Importante](./docs/confs_sources_priority.md)
 
 # Interacting with VSS from terminal
     You can interact with VSS using its HTTP API or VSTP protocol.
@@ -101,73 +102,6 @@ curl http://192.168.100.2:5023/n0/tests/testvariable
 curl -H "accept: text/plain" http://192.168.100.2:5023/n0/tests/testvariable
 #result: n0.tests.testvariable=the value of the variable
 ```
-
-## Telnet and VSTP
-VSTP is a text and single TCP connection based protocol, and you can use it over telnet. The default port of VSTP is 5032.
-    ```bash
-    telnet localhost 5032
-    ```
-
-    Once inside the telnet session, you can use the command '--help' to see a list of available commands.
-
-# Task lists
-## Main task List
-    charaters to be used ✔ ✘
-    [✔] Change folder 'source' name to 'sources' (look in the 'rastreio correios' project to see the makefile)
-    [✔] Alias is realy needed ? Remove alias system
-    [✔] Very important: Mutex variables (lock and u \nlock). 'lock' o(setAndUnlock) and 'unlock' (setVar can't change this variables when locked). An ideia: lock can return an token that can be used by an special setLockedVar to change this value (this allow just one client to change a locked variable).
-    [✔] Variables started with '_' are internal fla \gs. Do not allow this in names
-    [✔] Variable persistency
-    [✔] Configuration system (to specify)
-    [✔] UDP replay to server search
-    
-    [✔] Create a logger library
-    [✔] Create the configuration system (observable \ configuratiosystem)
-    [✔] Create the Controller_VarHelper to isolate v \ars logic forController
-  
-    
-    [✔] Convert TCP server to a repository
-  
-    [✔] Analyse the possibility of write var files  \in paralel (to besperformance/best latency)
-    [✔] Import new Logger lib repository
-    [✔] Import the TCPServer repo
-    [✔] Erros while setting variable with '*' char should be returned to the API (that will be able to return the error to the client)
-    [✔] When a client reconnects, the server needs to update it on all the variables it is looking at
-    [✔] Add HTTP Api
-    [✔] Configuration provider for Enviroment variables 
-    [✔] Configuration provider for Command line arguments
-## Tests
-    [✔] Controller
-    [✔] ControllerClientHelper
-    [✔] ControllerVarHelper
-    [✔] Services->APis->VSTP
-    [✔] Services->APis->VSTP->socketInfo
-    [✔] Shared->Libs->Confs
-    [✔] Shared->Libs->Confs->SimpleConfFileProvider
-    [✔] Shared->Libs->DependencyInjectionManager
-    [✔] Shared->Misc->TaggedObject
-    [✔] Services->ServerDiscovery
-    [✔] Services->APIs->Http
-    [ ] Services->APIs->Http->Web sockets
-    [✔] Configuration System 
-    [✔] CommandLineArgumentsConfsProvider
-    [✔] SoEnvirionmentConfProvider
-## Bugs
-    [ ] GetVar (vstp) is not returning error to client
-
-## Project Progress (30/35)
-    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░ ~85%
-
-## sugests and things to analyze    
-    - Restfull and WebSocket API
-    - Rename Controller to Business, Logic, core or core service (to analyze. It prevent confusing with MVC system)
-    - Paralel project (app server)
-    - Move all code of main.cpp to a class
-    - Convert configs to a repository
-    - Tests for Services->Storage->VarSystemLib
-
-
-
 
 # Further information
 
@@ -251,95 +185,7 @@ Of corse, if you are starting the comunication, you will not have one previous i
 
 With all explained, lets see how to continue how VSTP session in the both situation (with a new ID and with a previous one):
   
+Read more about VSTP in [VSTP Protocol](./docs/VSTP.md)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Vss Helper Text
-
-
-Vss is var stream server. A system that sotore variables that can be shared between process. Clients suposed to observate variables, and be notified when variables of interest are modified instead of polling the server.
-As Vss is a key-value store system, it is possible to store any kind of data, and can be used as a general purpose data store or database.
-
-Vss use multiple configuration source and are very flexible to configure it. It is possible to configure it using a configuration file, environment variables, or command line arguments. Of course, it is possible to use all of them at the same time. In the case of conflict, the order of precedence is command line arguments, environment variables, and, finally, the configuration file.
-
-Portable Mode: Portable mode means you are running VSS in a directory with a confs.conf file and not from /usr/bin (installed in the system)
-Integrated Mode: Integrated mode means you are running VSS from /usr/bin (installed in the system)
-
-
-General Configurations:
-
-    maxTimeWaitingClient_seconds: Maximum time waiting for clients to reconnect in a case of connection lost. Default is 12 hours.
-        Configuration File  : maxTimeWaitingClient_seconds
-        Command line        : --maxTimeWaitingForClients 
-        Environment variable: VSS_MAX_TIME_WAITING_CLIENTS
-
-    dbDirectory: Directory to store the database files. Default is %APP_DIR%/data/database.
-        Configuration File  : dbDirectory
-        Command line        : --dbDirectory
-        Environment variable: VSS_DB_DIRECTORY
-        
-    httpDataDir: Directory to store the http data files. Default is %APP_DIR%/data/http_data.
-        Configuration File  : httpDataDir
-        Command line        : --httpDataDir
-        Environment variable: VSS_HTTP_DATA_DIRECTORY
-
-    httpApiPort: Port to listen for http api requests. Default is 5024.
-        Configuration File  : httpApiPort
-        Command line        : --httpApiPort
-        Environment variable: VSS_HTTP_API_PORT
-
-    httpApiHttpsPort: Port to listen for https api requests. Default is 5025.
-        Configuration File  : httpApiHttpsPort
-        Command line        : --httpApiHttpsPort
-        Environment variable: VSS_HTTPS_API_PORT
-
-    vstpApiPort: Port to listen for vstp api requests. Default is 5032.
-        Configuration File  : vstpApiPort
-        Command line        : --vstpApiPort
-        Environment variable: VSS_VSTP_API_PORT
-
-    httpApiCertFile: File with the certificate to use in the https server. Default is %APP_DIR%/ssl/cert/vssCert.pem.
-        Configuration File  : httpApiCertFile
-        Command line        : --httpApiCertFile
-        Environment variable: VSS_HTTP_API_CERT_FILE
-
-    httpApiKeyFile: File with the key to use in the https server. Default is %APP_DIR%/ssl/cert/vssKey.pem.
-        Configuration File  : httpApiKeyFile
-        Command line        : --httpApiKeyFile
-        Environment variable: VSS_HTTP_API_KEY_FILE
-
-    Important information about the default values: Default values will only be used if the value is not provided in the configuration file, environment variables, or command line arguments. Default values are the latest resource to be used. This helper text session is only about the command line arguments. The other configuration will be explained bellow.
-        
-Command line call:
-    vss [options]
-
-    Options:
-        -h, --help: Show this help message and exit.    
-        -v, --version: Show version information and exit.
-        --maxTimeWaitingForClients: Maximum time waiting for clients to reconnect in a case of connection lost. Default is 12 hours.
-        --dbDirectory: Directory to store the database files. Default is %APP_DIR%/data/database.
-        --httpDataDir: Directory to store the http data files. Default is %APP_DIR%/data/http_data.
-        --httpApiPort: Port to listen for http api requests. Default is 5024.
-        --httpApiHttpsPort: Port to listen for https api requests. Default is 5025.
-        --vstpApiPort: Port to listen for vstp api requests. Default is 5032.
-        --httpApiCertFile: File with the certificate to use in the https server. Default is %APP_DIR%/ssl/cert/vssCert.pem.
-        --httpApiKeyFile: File with the key to use in the https server. Default is %APP_DIR%/ssl/cert/vssKey.pem.
-
-    Important information about the default values: Default values will only be used if the value is not provided in the configuration file, environment variables, or command line arguments. Default values are the latest resource to be used. This helper text session is only about the command line arguments. The other configuration will be explained bellow.
-
-
-# Task lists

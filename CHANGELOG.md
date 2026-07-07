@@ -1,7 +1,347 @@
+# Version v2.3.0+Capella changes
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
 
-# Version v2.2.0+Capella changes
-- chore: improves delete and add another improvments
-- feat: add configuration validation, helper text and more
-- refactor: delete values using ControllerVarHelper
-- feat: allow access to metadata vars
+# Version v2.3.0+Capella changes
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
+
+# Version v2.3.0+Capella changes
+- chore: restoring new version script
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
+
+# Version v2.3.0+Capella changes
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: restoring new version script
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
+
+# Version v2.3.0+Capella changes
+- doc: license file
+- chore: fixes new version system
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: restoring new version script
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
+
+# Version v2.3.0+Capella changes
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- doc: license file
+- chore: fixes new version system
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: restoring new version script
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
+
+# Version v2.3.0+Capella changes
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- doc: license file
+- chore: fixes new version system
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: restoring new version script
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- chore: changes version number to v2.3.0+Capella and updates CHANGELOG.md
+- feat: add prefixtree source code to the project
+- build: extension file
+- build: adjusts function identification in pman.sh
+- chore: new issues added
+- feat: add support for vss query language in var names
+- chore: add .pman to .gitignore
+- refactor: adjusts code to fit golint
+- chore: Merge branch 'feat/vstp_client_lib' into develop
+- refactor: small adjusts
+- build: adjusts new version system
+- build: extension files
+- feat: lock and unlock on HTTP API
+- refactor: adjust names to fit to golint
+- build: new features for pman system
+- build: dev container
+- chore: remove unsuded configurations from launch.json
+- fix: adjusts buld command to add debug symbols to vss binary (debug mode)
+- fix: solves problem with unitilized map
+- refactor: removes a debug line
+- fix: adjust wrong type on iextension.go
+- fix: add missing imports to evttcpclient
+- feat: add commandId and improves vstp responses performance
+- doc: remove icon from README.md
+- feat: change helptext to be adjustable to terminal size
+- fix: adjusts script that create new versions
+- fix: adjusts pman.sh to accept semantic commit with contexts
+- refactor (log library): adjusts print colors for critical messages
+- add color printin functions to utils library
+- chore: add dev-containers support
+- chore: adjusts go.mod file
+- doc: remove and adjusts README.md
+- doc: add docs about vstp and configuration system
+- feat: Go Vss Client Library
+- feat: add a flag to control lru syncronization
+- fix: solve problem with client observing deletation
+- feat: Add storage driver choosing system
+- chore: delete some old files
+- chore: remove old files about memory, queues and replication
+- changes SHU by Pman
+- doc: add new feature request docs
+- chore: reorganize issues
+- chore: adjusts shutdown sequence and messages
+- refactor: reduce code lines in the vstp api
 

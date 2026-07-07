@@ -1,0 +1,1206 @@
+[2026-04-03T14:03:55.000-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyWordLength: 64
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxKeyLength: 255
+                                          +-- fileLogLevel: info2
+                                          +-- maxValueSize: 1048576
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- DbDriver: ramcacheddb
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+[2026-04-03T14:03:55.000-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:03:55.012-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:03:55.012-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:03:55.012-0300] [INFO] [Main] ...Controller started.
+[2026-04-03T14:04:09.018-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxKeyWordLength: 64
+                                          +-- fileLogLevel: info2
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- allowRawDbAccess: false
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- stdoutLogLevel: info
+                                          +-- httpApiPort: 5024
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxKeyLength: 255
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- vstpApiPort: 5032
+[2026-04-03T14:04:09.018-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:04:09.023-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:04:26.118-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- vstpApiPort: 5032
+                                          +-- fileLogLevel: info2
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxValueSize: 1048576
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- allowRawDbAccess: false
+                                          +-- maxKeyLength: 255
+[2026-04-03T14:04:26.118-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:04:26.123-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:04:26.123-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:04:26.123-0300] [INFO] [Main] ...Controller started.
+[2026-04-03T14:04:26.123-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-03T14:04:26.138-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-03T14:04:26.138-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-03T14:04:26.141-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-03T14:04:32.927-0300] [INFO] [Main] Received the signal 'terminated', shutting down...
+[2026-04-03T14:04:32.927-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-04-03T14:04:37.719-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- vstpApiPort: 5032
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxKeyWordLength: 64
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- fileLogLevel: info2
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- stdoutLogLevel: info
+                                          +-- maxValueSize: 1048576
+[2026-04-03T14:04:37.719-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:04:37.724-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:04:37.724-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:04:37.724-0300] [INFO] [Main] ...Controller started.
+[2026-04-03T14:04:37.724-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-03T14:04:37.733-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-03T14:04:37.733-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-03T14:04:37.734-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-03T14:04:42.722-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 0-sulky crouton
+[2026-04-03T14:04:46.554-0300] [INFO] [Apis::VSTP] Client requested id change: 0-sulky crouton -> 0-sulky crouton
+[2026-04-03T14:05:00.356-0300] [INFO] [Apis::VSTP] VSTP client 0-sulky crouton disconnected
+[2026-04-03T14:05:01.022-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 1-chilly snickerdoodle
+[2026-04-03T14:05:01.022-0300] [INFO] [Apis::VSTP] Client requested id change: 1-chilly snickerdoodle -> 1-chilly snickerdoodle
+[2026-04-03T14:05:12.464-0300] [INFO] [Apis::VSTP] VSTP client 1-chilly snickerdoodle disconnected
+[2026-04-03T14:05:13.214-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 2-breezy tootsie
+[2026-04-03T14:05:13.215-0300] [INFO] [Apis::VSTP] Client requested id change: 2-breezy tootsie -> 2-breezy tootsie
+[2026-04-03T14:05:31.451-0300] [INFO] [Apis::VSTP] VSTP client 2-breezy tootsie disconnected
+[2026-04-03T14:05:32.168-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 3-boiling wombat
+[2026-04-03T14:05:32.168-0300] [INFO] [Apis::VSTP] Client requested id change: 3-boiling wombat -> 3-boiling wombat
+[2026-04-03T14:12:22.202-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- fileLogLevel: info2
+                                          +-- allowRawDbAccess: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiPort: 5024
+                                          +-- maxValueSize: 1048576
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxKeyLength: 255
+                                          +-- stdoutLogLevel: trace
+[2026-04-03T14:12:22.202-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:12:22.212-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:12:22.212-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:12:49.002-0300] [INFO] [Apis::VSTP] VSTP client 3-boiling wombat disconnected
+[2026-04-03T14:12:49.728-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 4-remarkable crouton
+[2026-04-03T14:12:53.377-0300] [INFO] [Apis::VSTP] Client requested id change: 4-remarkable crouton -> 4-remarkable crouton
+[2026-04-03T14:13:30.709-0300] [INFO] [Main] Received the signal 'interrupt', shutting down...
+[2026-04-03T14:13:30.709-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-04-03T14:13:36.732-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- maxKeyLength: 255
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiPort: 5024
+                                          +-- allowRawDbAccess: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- fileLogLevel: info2
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiReturnsFullPaths: false
+[2026-04-03T14:13:36.732-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:13:36.740-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:13:36.740-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:13:36.740-0300] [INFO] [Main] ...Controller started.
+[2026-04-03T14:13:36.740-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-03T14:13:36.747-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-03T14:13:36.747-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-03T14:13:36.748-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-03T14:13:43.641-0300] [INFO] [Main] Received the signal 'terminated', shutting down...
+[2026-04-03T14:13:43.641-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-04-03T14:14:08.413-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiPort: 5024
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxKeyLength: 255
+                                          +-- maxValueSize: 1048576
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- fileLogLevel: info2
+                                          +-- vstpApiPort: 5032
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- allowRawDbAccess: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+[2026-04-03T14:14:08.413-0300] [INFO] [Main] Starting storage ...
+[2026-04-03T14:14:08.448-0300] [INFO] [Main] ...Storage started.
+[2026-04-03T14:14:08.448-0300] [INFO] [Main] Starting controller ...
+[2026-04-03T14:14:08.448-0300] [INFO] [Main] ...Controller started.
+[2026-04-03T14:14:08.448-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-03T14:14:08.469-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-03T14:14:08.469-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-03T14:14:08.470-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-03T14:14:13.212-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 0-magenta chutney
+[2026-04-03T14:14:18.045-0300] [INFO] [Apis::VSTP] Client requested id change: 0-magenta chutney -> 0-magenta chutney
+[2026-04-03T14:14:39.818-0300] [INFO] [Apis::VSTP] VSTP client 0-magenta chutney disconnected
+[2026-04-03T14:14:40.510-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 1-quixotic snickerdoodle
+[2026-04-03T14:14:40.511-0300] [INFO] [Apis::VSTP] Client requested id change: 1-quixotic snickerdoodle -> 1-quixotic snickerdoodle
+[2026-04-03T14:14:56.936-0300] [INFO] [Apis::VSTP] VSTP client 1-quixotic snickerdoodle disconnected
+[2026-04-03T14:14:57.650-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 2-gleeful chips
+[2026-04-03T14:14:57.650-0300] [INFO] [Apis::VSTP] Client requested id change: 2-gleeful chips -> 2-gleeful chips
+[2026-04-03T18:38:18.573-0300] [INFO] [Apis::VSTP] VSTP client 2-gleeful chips disconnected
+[2026-04-04T11:32:42.820-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiPort: 5024
+                                          +-- stdoutLogLevel: trace
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyLength: 255
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- fileLogLevel: info2
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- DbDriver: ramcacheddb
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- allowRawDbAccess: false
+[2026-04-04T11:32:42.820-0300] [INFO] [Main] Starting storage ...
+[2026-04-04T11:32:42.843-0300] [INFO] [Main] ...Storage started.
+[2026-04-04T11:32:42.843-0300] [INFO] [Main] Starting controller ...
+[2026-04-04T11:32:42.843-0300] [INFO] [Main] ...Controller started.
+[2026-04-04T11:32:42.843-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-04T11:32:42.850-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-04T11:32:42.850-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-04T11:32:42.851-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-04T11:33:00.464-0300] [INFO] [Main] Received the signal 'terminated', shutting down...
+[2026-04-04T11:33:00.464-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-04-04T11:33:31.706-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxLogFileSize: 52428800
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxKeyWordLength: 64
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- fileLogLevel: info2
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxValueSize: 1048576
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- vstpApiPort: 5032
+[2026-04-04T11:33:31.706-0300] [INFO] [Main] Starting storage ...
+[2026-04-04T11:33:32.094-0300] [INFO] [Main] ...Storage started.
+[2026-04-04T11:33:32.094-0300] [INFO] [Main] Starting controller ...
+[2026-04-04T11:33:32.094-0300] [INFO] [Main] ...Controller started.
+[2026-04-04T11:33:32.094-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-04T11:33:32.387-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-04T11:33:32.387-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-04T11:33:32.397-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-04T22:38:00.699-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 0-hot boop
+[2026-04-04T22:38:00.703-0300] [INFO] [Apis::VSTP] Client requested id change: 0-hot boop -> 0-hot boop
+[2026-04-04T22:39:26.196-0300] [INFO] [Apis::VSTP] VSTP client 0-hot boop disconnected
+[2026-04-04T22:42:47.418-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 1-decadent jinx
+[2026-04-04T22:42:47.419-0300] [INFO] [Apis::VSTP] Client requested id change: 1-decadent jinx -> 1-decadent jinx
+[2026-04-04T22:46:51.678-0300] [INFO] [Apis::VSTP] VSTP client 1-decadent jinx disconnected
+[2026-04-04T22:46:53.072-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 2-fumbling fudge
+[2026-04-04T22:46:53.072-0300] [INFO] [Apis::VSTP] Client requested id change: 2-fumbling fudge -> 2-fumbling fudge
+[2026-04-04T22:47:40.935-0300] [INFO] [Apis::VSTP] VSTP client 2-fumbling fudge disconnected
+[2026-04-04T22:47:42.253-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 3-foul pogo
+[2026-04-04T22:47:42.254-0300] [INFO] [Apis::VSTP] Client requested id change: 3-foul pogo -> 3-foul pogo
+[2026-04-04T22:49:10.990-0300] [INFO] [Apis::VSTP] VSTP client 3-foul pogo disconnected
+[2026-04-04T22:49:12.195-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 4-red tootsie
+[2026-04-04T22:49:12.197-0300] [INFO] [Apis::VSTP] Client requested id change: 4-red tootsie -> 4-red tootsie
+[2026-04-04T22:50:07.642-0300] [INFO] [Apis::VSTP] VSTP client 4-red tootsie disconnected
+[2026-04-04T22:50:08.535-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 5-zealous ziggy
+[2026-04-04T22:50:08.537-0300] [INFO] [Apis::VSTP] Client requested id change: 5-zealous ziggy -> 5-zealous ziggy
+[2026-04-04T22:51:20.015-0300] [INFO] [Apis::VSTP] VSTP client 5-zealous ziggy disconnected
+[2026-04-04T22:51:21.715-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 6-fearful crouton
+[2026-04-04T22:51:21.716-0300] [INFO] [Apis::VSTP] Client requested id change: 6-fearful crouton -> 6-fearful crouton
+[2026-04-04T22:52:10.765-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 7-robust nacho
+[2026-04-04T22:52:10.765-0300] [INFO] [Apis::VSTP] VSTP client 6-fearful crouton disconnected
+[2026-04-04T22:52:14.158-0300] [INFO] [Apis::VSTP] VSTP client 7-robust nacho disconnected
+[2026-04-04T22:52:14.995-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 8-quick crumpet
+[2026-04-04T22:52:14.996-0300] [INFO] [Apis::VSTP] Client requested id change: 8-quick crumpet -> 8-quick crumpet
+[2026-04-04T22:55:16.994-0300] [INFO] [Apis::VSTP] VSTP client 8-quick crumpet disconnected
+[2026-04-04T22:55:18.125-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 9-steep chutney
+[2026-04-04T22:55:18.127-0300] [INFO] [Apis::VSTP] Client requested id change: 9-steep chutney -> 9-steep chutney
+[2026-04-04T22:58:43.920-0300] [INFO] [Apis::VSTP] VSTP client 9-steep chutney disconnected
+[2026-04-04T22:59:00.561-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 10-helpful fizzy
+[2026-04-04T22:59:00.565-0300] [INFO] [Apis::VSTP] Client requested id change: 10-helpful fizzy -> 10-helpful fizzy
+[2026-04-04T23:03:46.470-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxValueSize: 1048576
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiPort: 5024
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- allowRawDbAccess: false
+                                          +-- fileLogLevel: info2
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- vstpApiPort: 5032
+                                          +-- stdoutLogLevel: trace
+[2026-04-04T23:03:46.470-0300] [INFO] [Main] Starting storage ...
+[2026-04-04T23:03:46.479-0300] [INFO] [Main] ...Storage started.
+[2026-04-04T23:03:46.479-0300] [INFO] [Main] Starting controller ...
+[2026-04-04T23:03:46.479-0300] [INFO] [Main] ...Controller started.
+[2026-04-04T23:03:46.479-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-04T23:03:46.482-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-04T23:03:46.482-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-04T23:03:46.484-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-04T23:03:59.145-0300] [INFO] [Main] Received the signal 'terminated', shutting down...
+[2026-04-04T23:03:59.145-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-04-04T23:04:04.757-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- fileLogLevel: info2
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- allowRawDbAccess: false
+                                          +-- maxKeyLength: 255
+                                          +-- vstpApiPort: 5032
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxLogFileSize: 52428800
+                                          +-- stdoutLogLevel: trace
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+                                          +-- maxValueSize: 1048576
+[2026-04-04T23:04:04.757-0300] [INFO] [Main] Starting storage ...
+[2026-04-04T23:04:04.767-0300] [INFO] [Main] ...Storage started.
+[2026-04-04T23:04:04.767-0300] [INFO] [Main] Starting controller ...
+[2026-04-04T23:04:04.767-0300] [INFO] [Main] ...Controller started.
+[2026-04-04T23:04:04.767-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-04T23:04:04.769-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-04T23:04:04.769-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-04T23:04:04.772-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-04T23:04:56.705-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiPort: 5024
+                                          +-- vstpApiPort: 5032
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- maxValueSize: 1048576
+                                          +-- DbDriver: ramcacheddb
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxKeyLength: 255
+                                          +-- fileLogLevel: info2
+                                          +-- maxLogFileSize: 52428800
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxKeyWordLength: 64
+[2026-04-04T23:04:56.705-0300] [INFO] [Main] Starting storage ...
+[2026-04-04T23:04:56.731-0300] [INFO] [Main] ...Storage started.
+[2026-04-04T23:04:56.731-0300] [INFO] [Main] Starting controller ...
+[2026-04-04T23:04:56.731-0300] [INFO] [Main] ...Controller started.
+[2026-04-04T23:04:56.731-0300] [INFO] [Main] Starting VSTP API ...
+[2026-04-04T23:04:56.771-0300] [INFO] [Main] ...VSTP API started.
+[2026-04-04T23:04:56.771-0300] [INFO] [Main] Starting HTTP API ...
+[2026-04-04T23:04:56.775-0300] [INFO] [Main] ...HTTP API started.
+[2026-04-04T23:05:04.509-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 0-muffled sprout
+[2026-04-04T23:05:04.511-0300] [INFO] [Apis::VSTP] Client requested id change: 0-muffled sprout -> 0-muffled sprout
+[2026-04-04T23:06:30.017-0300] [INFO] [Apis::VSTP] VSTP client 0-muffled sprout disconnected
+[2026-04-04T23:06:30.650-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 1-deep moose
+[2026-04-04T23:07:00.049-0300] [INFO] [Apis::VSTP] Client requested id change: 1-deep moose -> 1-deep moose
+[2026-04-04T23:07:21.292-0300] [INFO] [Apis::VSTP] VSTP client 1-deep moose disconnected
+[2026-04-04T23:07:21.988-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 2-sturdy fizzy
+[2026-04-04T23:07:26.403-0300] [INFO] [Apis::VSTP] Client requested id change: 2-sturdy fizzy -> 2-sturdy fizzy
+[2026-04-04T23:09:13.317-0300] [INFO] [Apis::VSTP] VSTP client 2-sturdy fizzy disconnected
+[2026-04-04T23:09:14.469-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 3-breezy jinx
+[2026-04-04T23:09:19.343-0300] [INFO] [Apis::VSTP] Client requested id change: 3-breezy jinx -> 3-breezy jinx
+[2026-04-04T23:10:12.831-0300] [INFO] [Apis::VSTP] VSTP client 3-breezy jinx disconnected
+[2026-04-04T23:10:13.429-0300] [INFO] [Apis::VSTP] New VSTP client connected, assigned id: 4-languid pepper
+[2026-04-04T23:10:13.431-0300] [INFO] [Apis::VSTP] Client requested id change: 4-languid pepper -> 4-languid pepper
+[2026-04-11T17:11:58.268-0300] [INFO] [Apis::VSTP] VSTP client 4-languid pepper disconnected
+[2026-05-09T12:20:22.199-0300] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxValueSize: 1048576
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- fileLogLevel: info2
+                                          +-- vstpApiPort: 5032
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxKeyLength: 255
+                                          +-- maxLogFileSize: 52428800
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiPort: 5024
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- stdoutLogLevel: info
+                                          +-- DbPath: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/database
+                                          +-- httpDataDir: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/data/http_data
+                                          +-- httpApiCertFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- httpApiKeyFile: /media/veracrypt/projects/rafinha_tonello/Home automation and related projects/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxKeyWordLength: 64
+[2026-05-09T12:20:22.199-0300] [INFO] [Main] Starting storage ...
+[2026-05-09T12:20:22.258-0300] [INFO] [Main] ...Storage started.
+[2026-05-09T12:20:22.258-0300] [INFO] [Main] Starting controller ...
+[2026-05-09T12:20:22.258-0300] [INFO] [Main] ...Controller started.
+[2026-05-09T12:20:22.258-0300] [INFO] [Main] Starting VSTP API ...
+[2026-05-09T12:20:22.300-0300] [INFO] [Main] ...VSTP API started.
+[2026-05-09T12:20:22.300-0300] [INFO] [Main] Starting HTTP API ...
+[2026-05-09T12:20:22.302-0300] [INFO] [Main] ...HTTP API started.
+[2026-05-09T12:20:35.804-0300] [INFO] [Main] Received the signal 'interrupt', shutting down...
+[2026-05-09T12:20:35.805-0300] [INFO] [Main] Vss gracefully shut down. Bye!
+[2026-07-06T13:29:05.975+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- allowRawDbAccess: false
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiPort: 5024
+                                          +-- fileLogLevel: info2
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- DbDriver: ramcacheddb
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyLength: 255
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxValueSize: 1048576
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxKeyWordLength: 64
+[2026-07-06T13:29:05.986+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T13:29:06.080+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T13:29:06.080+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T13:29:06.080+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T13:29:06.080+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T13:29:06.169+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T13:29:06.169+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T13:29:06.188+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T13:35:30.650+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiPort: 5024
+                                          +-- vstpApiPort: 5032
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- allowRawDbAccess: false
+                                          +-- fileLogLevel: info2
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxLogFileSize: 52428800
+[2026-07-06T13:35:30.654+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T13:35:30.708+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T13:35:30.708+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T13:35:30.711+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T13:35:30.711+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T13:35:30.745+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T13:35:30.745+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T13:35:30.763+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T13:36:49.671+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- DbDriver: ramcacheddb
+                                          +-- fileLogLevel: info2
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxValueSize: 1048576
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyLength: 255
+                                          +-- maxKeyWordLength: 64
+                                          +-- allowRawDbAccess: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxTimeWaitingClient_seconds: 43200
+[2026-07-06T13:36:49.671+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T13:36:49.694+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T13:38:36.036+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxValueSize: 1048576
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxKeyLength: 255
+                                          +-- allowRawDbAccess: false
+                                          +-- fileLogLevel: info2
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+[2026-07-06T13:38:36.038+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T13:38:36.066+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T13:38:36.066+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T13:38:36.066+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T13:38:36.066+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T13:38:36.091+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T13:38:36.091+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T13:38:36.101+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:25:34.283+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyLength: 255
+                                          +-- maxValueSize: 1048576
+                                          +-- allowRawDbAccess: false
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- fileLogLevel: info2
+[2026-07-06T17:25:34.286+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:25:34.378+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:25:34.378+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:25:34.378+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:25:34.378+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:25:34.421+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:25:34.421+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:25:34.435+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:28:41.587+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- vstpApiPort: 5032
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- maxValueSize: 1048576
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxKeyLength: 255
+                                          +-- fileLogLevel: info2
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- stdoutLogLevel: trace
+                                          +-- allowRawDbAccess: false
+                                          +-- DbDriver: ramcacheddb
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- serverDiscoveryPort: 5022
+[2026-07-06T17:28:41.604+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:28:41.670+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:28:41.670+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:28:41.670+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:28:41.670+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:28:41.719+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:28:41.719+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:28:41.740+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:29:39.658+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- fileLogLevel: info2
+                                          +-- stdoutLogLevel: trace
+                                          +-- allowRawDbAccess: false
+                                          +-- DbDriver: ramcacheddb
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxValueSize: 1048576
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- maxLogFileSize: 52428800
+[2026-07-06T17:29:39.665+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:29:39.687+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:29:39.687+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:29:39.687+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:29:39.687+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:29:39.708+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:29:39.708+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:29:39.717+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:31:32.050+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxKeyLength: 255
+                                          +-- maxValueSize: 1048576
+                                          +-- allowRawDbAccess: false
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- fileLogLevel: info2
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- stdoutLogLevel: trace
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- vstpApiPort: 5032
+[2026-07-06T17:31:32.069+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:31:32.126+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:31:32.126+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:31:32.126+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:31:32.126+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:31:32.182+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:31:32.182+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:31:32.201+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:38:29.156+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- allowRawDbAccess: false
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiPort: 5024
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxKeyLength: 255
+                                          +-- fileLogLevel: info2
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxValueSize: 1048576
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- serverDiscoveryPort: 5022
+[2026-07-06T17:38:29.160+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:38:29.191+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:38:29.191+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:38:29.191+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:38:29.191+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:38:29.217+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:38:29.217+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:38:29.228+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:38:49.310+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxKeyLength: 255
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- allowRawDbAccess: false
+                                          +-- fileLogLevel: info2
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- DbDriver: ramcacheddb
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- vstpApiPort: 5032
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiPort: 5024
+[2026-07-06T17:38:49.324+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:38:49.366+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:38:49.366+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:38:49.366+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:38:49.366+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:38:49.391+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:38:49.391+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:38:49.397+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:43:54.722+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- vstpApiPort: 5032
+                                          +-- allowRawDbAccess: false
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxValueSize: 1048576
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- maxKeyLength: 255
+                                          +-- maxKeyWordLength: 64
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- fileLogLevel: info2
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiPort: 5024
+[2026-07-06T17:43:54.725+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:43:54.747+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:43:54.747+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:43:54.747+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:43:54.747+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:43:54.760+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:43:54.760+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:43:54.765+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:44:26.856+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- maxKeyLength: 255
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- allowRawDbAccess: false
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- maxKeyWordLength: 64
+                                          +-- stdoutLogLevel: trace
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiPort: 5024
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- DbDriver: ramcacheddb
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- fileLogLevel: info2
+                                          +-- serverDiscoveryPort: 5022
+[2026-07-06T17:44:26.865+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:44:26.911+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:44:26.911+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:44:26.911+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:44:26.913+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:44:26.947+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:44:26.948+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:44:26.974+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:44:44.077+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- DbDriver: ramcacheddb
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- allowRawDbAccess: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxKeyLength: 255
+                                          +-- vstpApiPort: 5032
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- maxKeyWordLength: 64
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- fileLogLevel: info2
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiPort: 5024
+                                          +-- stdoutLogLevel: trace
+[2026-07-06T17:44:44.086+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:44:44.126+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:44:44.126+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:44:44.126+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:44:44.127+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:44:44.152+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:44:44.152+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:44:44.180+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:45:11.812+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiPort: 5024
+                                          +-- vstpApiPort: 5032
+                                          +-- maxKeyWordLength: 64
+                                          +-- maxLogFileSize: 52428800
+                                          +-- fileLogLevel: info2
+                                          +-- DbDriver: ramcacheddb
+                                          +-- allowRawDbAccess: false
+                                          +-- maxKeyLength: 255
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- stdoutLogLevel: trace
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxValueSize: 1048576
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiHttpsPort: 5025
+[2026-07-06T17:45:11.813+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:45:11.837+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:45:11.837+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:45:11.837+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:45:11.838+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:45:11.853+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:45:11.853+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:45:11.861+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:46:18.060+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- maxKeyLength: 255
+                                          +-- maxLogFileSize: 52428800
+                                          +-- maxValueSize: 1048576
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- fileLogLevel: info2
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- stdoutLogLevel: trace
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- allowRawDbAccess: false
+                                          +-- vstpApiPort: 5032
+                                          +-- DbDriver: ramcacheddb
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+[2026-07-06T17:46:18.070+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:46:18.119+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:46:18.119+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:46:18.119+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:46:18.119+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:46:18.177+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:46:18.177+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:46:18.205+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:47:05.298+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- maxLogFileSize: 52428800
+                                          +-- fileLogLevel: info2
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiPort: 5024
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- allowRawDbAccess: false
+                                          +-- maxValueSize: 1048576
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- stdoutLogLevel: trace
+                                          +-- DbDriver: ramcacheddb
+                                          +-- maxKeyLength: 255
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- maxKeyWordLength: 64
+                                          +-- httpApiHttpsPort: 5025
+[2026-07-06T17:47:05.300+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:47:05.343+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:47:05.343+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:47:05.343+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:47:05.344+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:47:05.380+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:47:05.381+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:47:05.418+0000] [INFO] [Main] ...HTTP API started.
+[2026-07-06T17:50:42.262+0000] [INFO] The VSS has been started
+                                      +-- Version: 2.0.0+Capella
+                                      +-- Portable mode: Yes
+                                      |   +-- conf file: /workspaces/VarStreamServer/build/config/vss.conf
+                                      |   +-- log file: /workspaces/VarStreamServer/build/vss.log
+                                      |   +-- database folder: /workspaces/VarStreamServer/build/data/database
+                                      +-- Services
+                                      |   +-- VSTP port: TCP/5032
+                                      |   +-- HTTP port: TCP/5024(http) + TCP/5025(https)
+                                      |   +-- Server discovery port: UDP/5022
+                                      +-- All configurations
+                                          +-- httpApiKeyFile: /workspaces/VarStreamServer/build/ssl/cert/vssKey.pem
+                                          +-- maxTimeWaitingClient_seconds: 43200
+                                          +-- allowRawDbAccess: false
+                                          +-- fileLogLevel: info2
+                                          +-- maxValueSize: 1048576
+                                          +-- httpApiReturnsFullPaths: false
+                                          +-- serverDiscoveryPort: 5022
+                                          +-- vstpApiPort: 5032
+                                          +-- httpApiHttpsPort: 5025
+                                          +-- httpDataDir: /workspaces/VarStreamServer/build/data/http_data
+                                          +-- httpApiCertFile: /workspaces/VarStreamServer/build/ssl/cert/vssCert.pem
+                                          +-- maxLogFileSize: 52428800
+                                          +-- httpApiPort: 5024
+                                          +-- DbPath: /workspaces/VarStreamServer/build/data/database
+                                          +-- RamCacheDbDumpIntervalMs: 60000
+                                          +-- maxKeyLength: 255
+                                          +-- stdoutLogLevel: trace
+                                          +-- maxKeyWordLength: 64
+                                          +-- DbDriver: ramcacheddb
+[2026-07-06T17:50:42.264+0000] [INFO] [Main] Starting storage ...
+[2026-07-06T17:50:42.283+0000] [INFO] [Main] ...Storage started.
+[2026-07-06T17:50:42.283+0000] [INFO] [Main] Starting controller ...
+[2026-07-06T17:50:42.284+0000] [INFO] [Main] ...Controller started.
+[2026-07-06T17:50:42.284+0000] [INFO] [Main] Starting VSTP API ...
+[2026-07-06T17:50:42.298+0000] [INFO] [Main] ...VSTP API started.
+[2026-07-06T17:50:42.298+0000] [INFO] [Main] Starting HTTP API ...
+[2026-07-06T17:50:42.305+0000] [INFO] [Main] ...HTTP API started.

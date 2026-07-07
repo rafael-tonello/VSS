@@ -11,10 +11,12 @@ import (
 	"rtonello/vss/sources/misc"
 	"rtonello/vss/sources/services/apis/vstp"
 	"rtonello/vss/sources/services/storage"
+	"strconv"
 	"strings"
-	"sync"
 	"syscall"
 	"time"
+
+	"golang.org/x/term"
 
 	"rtonello/vss/sources/misc/logger"
 	logwriters "rtonello/vss/sources/misc/logger/writers"
@@ -24,7 +26,7 @@ import (
 	httpapi "rtonello/vss/sources/services/apis/httpapi"
 )
 
-const INFO_VERSION = "2.0.0+Capella"
+const INFO_VERSION = "v2.3.0+Capella"
 
 func main() {
 
@@ -113,82 +115,167 @@ func main() {
 	setupSignalHandler(sigs)
 
 	sig := <-sigs
-	mainLog.Info("Received signal: " + sig.String() + ", shutting down...")
+	mainLog.Info("Received the signal '" + sig.String() + "', shutting down...")
 
 	//finalize services in reverse order
+	//vstp.Finalize()
+	//httpapi.Finalize()
+	theStorage.Finalize()
 
-	//kepp app running
-	mx := sync.Mutex{}
-	mx.Lock()
-	mx.Lock()
+	mainLog.Info("Vss gracefully shut down. Bye!")
+
+	//wait one second to logger flush all messages
+	time.Sleep(1 * time.Second)
+	os.Exit(0)
+}
+
+func printHelpLine(line string, terminalSize int) {
+	//find the last sequence of two spaces ('  ')
+	index := strings.LastIndex(line, "  ")
+	//if not found, just print the line
+	if index == -1 || len(line) < terminalSize {
+		fmt.Println(line)
+	} else {
+		index += 2
+		//the current line is printed until it reaches the terminal size, after this, new lines
+		//will be printed using a 'identation' of 'index' + 1 spaces. This shift of 1 space let the
+		//text visually connected to the first line.
+		//The next lines also respect the terminalSize
+
+		for {
+			if len(line) < terminalSize {
+				fmt.Println(line)
+				break
+			}
+
+			toPrint := line[:terminalSize]
+			//look in the 20 previus charses to find the last space, to avoid breaking words. If not found, just break at terminalSize
+			lastSpace := strings.LastIndex(toPrint, " ")
+			if lastSpace != -1 && lastSpace > terminalSize-20 {
+				toPrint = line[:lastSpace+1]
+			}
+
+			//remove the 'toPrint' from line
+			line = line[len(toPrint):]
+			if len(line) == 0 {
+				fmt.Println(toPrint)
+				break
+			}
+			fmt.Println(toPrint)
+
+			//add identation to remaining text
+			identation := strings.Repeat(" ", index+1)
+			line = identation + line
+		}
+	}
 
 }
 
-func displayHelpOrVersion() bool {
-	for _, arg := range os.Args {
-		if arg == "--help" || arg == "-h" || arg == "/?" {
+func getTerminalSize() int {
+	const defaultTerminalSize = 80
 
-			fmt.Println("VarServerSHU - The variable server for SHU-based systems")
-			fmt.Println("Version: " + INFO_VERSION)
-			fmt.Println("Usage: vss [options]")
-			fmt.Println("Options:")
-			fmt.Println("  -h, --help, /?, -?, help          Show this help message and exit")
-			//options from settings
-			fmt.Println("  --version                         Show version information and exit")
-			fmt.Println("  --http-api-port <port>            Set the HTTP API port (default: 5024 or value in conf file)")
-			fmt.Println("  --http-api-https-port <port>      Set the HTTPS API port (default: 5025 or value in conf file)")
-			fmt.Println("  --http-data-folder                Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)")
-			fmt.Println("  --http-api-cert-file              Set the HTTPS certificate file (default: ./ssl/cert/vssCert.pem or value in conf file)")
-			fmt.Println("  --http-api-key-file               Set the HTTPS key file (default: ./ssl/cert/vssKey.pem or value in conf file)")
-			fmt.Println("  --http-api-returns-full-paths     If true, HTTP API will return entire variables paths in the JSON results (default: false or value in conf file)")
-			fmt.Println("  --ram-cache-db-dump-interval-ms   Set the interval, in milliseconds, to RamCacheDB service check for changes in the memory and dump data to disk (default: 60000 or value in conf file)")
-			fmt.Println("  --vstp-api-port <port>            Set the VSTP API port (default: 5032 or value in conf file)")
-			fmt.Println("  --db-directory <path>             Set the database directory (default: /var/vss/data/database or value in conf file)")
-			fmt.Println("  --http-data-directory <path>      Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)")
-			fmt.Println("  --max-log-file-size <size_in_bytes>")
-			fmt.Println("  									 Set the maximum log file size in bytes before rotation (default: 52428800 or value in conf file)")
-			fmt.Println("  --max-time-waiting-for-clients <seconds>")
-			fmt.Println("  									 Set the maximum time in seconds to consider a client disconnected (default: 43200 or value in conf file)")
-			fmt.Println("  --stdout-log-level <level>        Set the log level for console output (default: info or value in conf file)")
-			fmt.Println("    levels:")
-			fmt.Println("      trace						     Very detailed logs, used for debugging")
-			fmt.Println("      debug						     Detailed logs, used for debugging")
-			fmt.Println("      info							     General information logs")
-			fmt.Println("      warning						     Warnings about potential issues")
-			fmt.Println("      error						     Errors that occurred")
-			fmt.Println("      critical						     Critical errors that may cause shutdown")
-			fmt.Println("  --file-log-level <level>          Set the log level for file output (default: info or value in conf file)")
-			fmt.Println("  --max-key-length <length>         Set the maximum key length in characters (default: 255 or value in conf file)")
-			fmt.Println("  --max-key-word-length <length>    Set the maximum key word length in characters (default: 64 or value in conf file)")
-			fmt.Println("  --max-value-size <size_in_bytes>  Set the maximum value size in bytes (default: 1048576 or value in conf file)")
-			fmt.Println("  --allow-raw-db-access <true|false>")
-			fmt.Println("                                    If true, allows raw database access without 'vars.' prefix (default: false or value in conf file)")
-			fmt.Println("")
-			fmt.Println("Environment Variables:")
-			fmt.Println("  VSS_HTTP_API_PORT                 Same as --http-api-port")
-			fmt.Println("  VSS_HTTP_API_HTTPS_PORT           Same as --http-api-https-port")
-			fmt.Println("  VSS_VSTP_API_PORT                 Same as --vstp-api-port")
-			fmt.Println("  VSS_HTTP_DATA_FOLDER              Same as --http-data-folder")
-			fmt.Println("  VSS_HTTP_API_CERT_FILE            Same as --http-api-cert-file")
-			fmt.Println("  VSS_HTTP_API_KEY_FILE             Same as --http-api-key-file")
-			fmt.Println("  VSS_HTTP_API_RETURN_FULL_PATHS    Same as --http-api-return-full-paths")
-			fmt.Println("  VSS_RAM_CACHE_DB_DUMP_INTERVAL_MS Same as --ram-cache-db-dump-interval-ms")
-			fmt.Println("  VSS_VSTP_API_PORT                 Same as --vstp-api-port")
-			fmt.Println("  VSS_DB_DIRECTORY                  Same as --db-directory")
-			fmt.Println("  VSS_HTTP_DATA_DIRECTORY           Same as --http-data-directory")
-			fmt.Println("  VSS_MAX_LOG_FILE_SIZE             Same as --max-log-file-size")
-			fmt.Println("  VSS_MAX_TIME_WAITING_CLIENTS      Same as --max-time-waiting-clients")
-			fmt.Println("  VSS_STDOUT_LOG_LEVEL              Same as --stdout-log-level")
-			fmt.Println("  VSS_FILE_LOG_LEVEL                Same as --file-log-level")
-			fmt.Println("  VSS_MAX_KEY_LENGTH                Same as --max-key-length")
-			fmt.Println("  VSS_MAX_KEY_WORD_LENGTH           Same as --max-key-word-length")
-			fmt.Println("  VSS_MAX_VALUE_SIZE                Same as --max-value-size")
-			fmt.Println("  VSS_ALLOW_RAW_DB_ACCESS           Same as --allow-raw-db-access")
-			fmt.Println("")
-			fmt.Println("Command line arguments are more important than environment variables, which are more important than configuration file values.")
-			fmt.Println("For more information, visit the documentation.")
-		} else if arg == "--version" || arg == "-v" {
+	// Try common terminal streams first.
+	fds := []int{int(os.Stdout.Fd()), int(os.Stderr.Fd()), int(os.Stdin.Fd())}
+	for _, fd := range fds {
+		if fd < 0 {
+			continue
+		}
+
+		width, _, err := term.GetSize(fd)
+		if err == nil && width > 0 {
+			return width
+		}
+	}
+
+	// Fallback for non-interactive contexts where COLUMNS is exported.
+	if cols := os.Getenv("COLUMNS"); cols != "" {
+		if parsed, err := strconv.Atoi(cols); err == nil && parsed > 0 {
+			return parsed
+		}
+	}
+
+	return defaultTerminalSize
+}
+
+func displayHelpOrVersion() bool {
+	//get terminal size
+	terminalSize := getTerminalSize()
+
+	for _, arg := range os.Args {
+		switch arg {
+		case "--help", "-h", "/?", "-?":
+			printHelpLine("VarServerSHU - The variable server for SHU-based systems", terminalSize)
+			printHelpLine("Version: "+INFO_VERSION, terminalSize)
+			printHelpLine("", terminalSize)
+
+			misc.PrintWithColor("Usage: vss [options]\n", misc.TerminalColorGreen)
+			printHelpLine("Options:", terminalSize)
+			printHelpLine("  -h, --help, /?, -?, help          Show this help message and exit", terminalSize)
+			printHelpLine("", terminalSize)
+			printHelpLine("  --version                         Show version information and exit", terminalSize)
+			printHelpLine("  --http-api-port <port>            Set the HTTP API port (default: 5024 or value in conf file)", terminalSize)
+			printHelpLine("  --http-api-https-port <port>      Set the HTTPS API port (default: 5025 or value in conf file)", terminalSize)
+			printHelpLine("  --http-data-folder                Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)", terminalSize)
+			printHelpLine("  --http-api-cert-file              Set the HTTPS certificate file (default: ./ssl/cert/vssCert.pem or value in conf file)", terminalSize)
+			printHelpLine("  --http-api-key-file               Set the HTTPS key file (default: ./ssl/cert/vssKey.pem or value in conf file)", terminalSize)
+			printHelpLine("  --http-api-returns-full-paths     If true, HTTP API will return entire variables paths in the JSON results (default: false or value in conf file)", terminalSize)
+			printHelpLine("  --http-data-directory <path>      Set the HTTP data directory (default: /var/vss/data/http_data or value in conf file)", terminalSize)
+			printHelpLine("  --ram-cache-db-dump-interval-ms   Set the interval, in milliseconds, to RamCacheDB service check for changes in the memory and dump data to disk (default: 60000 or value in conf file)", terminalSize)
+			printHelpLine("  --vstp-api-port <port>            Set the VSTP API port (default: 5032 or value in conf file)", terminalSize)
+			printHelpLine("  --db-driver <driver_name>         Set the database driver (default: ramcacheddb or value in conf file). Available drivers: ramcacheddb, ramcacheddbpkv", terminalSize)
+			printHelpLine("    driver names:", terminalSize)
+			printHelpLine("      ramcacheddb                     An in-memory database with periodic dumps to disk. Uses a custom tree structure to store variables and their hierarchy. Data is stored in a single file on disk. This is the default driver.", terminalSize)
+			printHelpLine("      ramcacheddbpkv                  Similar to ramcacheddb but uses a prefix tree (key-value store) for storage. This may provide better performance for certain workloads and allows more efficient storage of hierarchical keys. Data is stored in a single file on disk.", terminalSize)
+			printHelpLine("  --db-path <path>                  Set the database path (default: /var/vss/data/database or value in conf file). Db driver dices if it wll be a file or a directory based on the presence of an extension in the provided path.", terminalSize)
+			printHelpLine("  --max-log-file-size <size_in_bytes>", terminalSize)
+			printHelpLine("                                    Set the maximum log file size in bytes before rotation (default: 52428800 or value in conf file)", terminalSize)
+			printHelpLine("  --max-time-waiting-for-clients <seconds>", terminalSize)
+			printHelpLine("                                    Set the maximum time in seconds to consider a client disconnected (default: 43200 or value in conf file)", terminalSize)
+			printHelpLine("  --stdout-log-level <level>        Set the log level for console output (default: info or value in conf file)", terminalSize)
+			printHelpLine("    levels:", terminalSize)
+			printHelpLine("      trace                           Very detailed logs, used for debugging", terminalSize)
+			printHelpLine("      debug                           Detailed logs, used for debugging", terminalSize)
+			printHelpLine("      info                            General information logs", terminalSize)
+			printHelpLine("      warning                         Warnings about potential issues", terminalSize)
+			printHelpLine("      error                           Errors that occurred", terminalSize)
+			printHelpLine("      critical                        Critical errors that may cause shutdown", terminalSize)
+			printHelpLine("  --file-log-level <level>          Set the log level for file output (default: info or value in conf file)", terminalSize)
+			printHelpLine("  --max-key-length <length>         Set the maximum key length in characters (default: 255 or value in conf file)", terminalSize)
+			printHelpLine("  --max-key-word-length <length>    Set the maximum key word length in characters (default: 64 or value in conf file)", terminalSize)
+			printHelpLine("  --max-value-size <size_in_bytes>  Set the maximum value size in bytes (default: 1048576 or value in conf file)", terminalSize)
+			printHelpLine("  --allow-raw-db-access <true|false>", terminalSize)
+			printHelpLine("                                    If true, allows raw database access without 'vars.' prefix (default: false or value in conf file)", terminalSize)
+			printHelpLine("", terminalSize)
+
+			misc.PrintWithColor("Environment Variables:\n", misc.TerminalColorGreen)
+			printHelpLine("  VSS_HTTP_API_PORT                 Same as --http-api-port", terminalSize)
+			printHelpLine("  VSS_HTTP_API_HTTPS_PORT           Same as --http-api-https-port", terminalSize)
+			printHelpLine("  VSS_VSTP_API_PORT                 Same as --vstp-api-port", terminalSize)
+			printHelpLine("  VSS_HTTP_DATA_FOLDER              Same as --http-data-folder", terminalSize)
+			printHelpLine("  VSS_HTTP_API_CERT_FILE            Same as --http-api-cert-file", terminalSize)
+			printHelpLine("  VSS_HTTP_API_KEY_FILE             Same as --http-api-key-file", terminalSize)
+			printHelpLine("  VSS_HTTP_API_RETURN_FULL_PATHS    Same as --http-api-return-full-paths", terminalSize)
+			printHelpLine("  VSS_RAM_CACHE_DB_DUMP_INTERVAL_MS", terminalSize)
+			printHelpLine("                                    Same as --ram-cache-db-dump-interval-ms", terminalSize)
+			printHelpLine("  VSS_VSTP_API_PORT                 Same as --vstp-api-port", terminalSize)
+			printHelpLine("  VSS_DB_DRIVER                     Same as --db-driver", terminalSize)
+			printHelpLine("  VSS_DB_PATH                       Same as --db-path", terminalSize)
+			printHelpLine("  VSS_HTTP_DATA_DIRECTORY           Same as --http-data-directory", terminalSize)
+			printHelpLine("  VSS_MAX_LOG_FILE_SIZE             Same as --max-log-file-size", terminalSize)
+			printHelpLine("  VSS_MAX_TIME_WAITING_CLIENTS      Same as --max-time-waiting-clients", terminalSize)
+			printHelpLine("  VSS_STDOUT_LOG_LEVEL              Same as --stdout-log-level", terminalSize)
+			printHelpLine("  VSS_FILE_LOG_LEVEL                Same as --file-log-level", terminalSize)
+			printHelpLine("  VSS_MAX_KEY_LENGTH                Same as --max-key-length", terminalSize)
+			printHelpLine("  VSS_MAX_KEY_WORD_LENGTH           Same as --max-key-word-length", terminalSize)
+			printHelpLine("  VSS_MAX_VALUE_SIZE                Same as --max-value-size", terminalSize)
+			printHelpLine("  VSS_ALLOW_RAW_DB_ACCESS           Same as --allow-raw-db-access", terminalSize)
+			printHelpLine("", terminalSize)
+			misc.PrintWithColor("Command line arguments are more important than environment variables, which are more important than configuration file values.\n", misc.TerminalColorYellow)
+			misc.PrintWithColor("For more information, visit the documentation.\n", misc.TerminalColorYellow)
+			return true
+		case "--version", "-v", "version":
 			fmt.Println("VSS Version: " + INFO_VERSION)
+			return true
 		}
 	}
 	return false
@@ -243,7 +330,7 @@ func printBanner(logger logger.ILogger, configs confs.IConfs) {
 
 	text += "" + "|   +-- log file: " + determineLogFile() + "\n"
 
-	tmp := configs.GetConfig("DbDirectory").Value()
+	tmp := configs.GetConfig("DbPath").Value()
 	text += "" + "|   +-- database folder: " + tmp.GetString() + "\n"
 	text += "" + "+-- Services" + "\n"
 
@@ -282,9 +369,9 @@ func initConfigurations() confs.IConfs {
 	)
 
 	theConfs.AddPlaceHolders(map[string]string{
-		"%PROJECT_DIR%":              getApplicationDirectory(false),
-		"%APP_DIR%":                  getApplicationDirectory(false),
-		"%SUGGESTED_DATA_DIRECTORY%": suggestDataDirectory(),
+		"%PROJECT_DIR%":         getApplicationDirectory(false),
+		"%APP_DIR%":             getApplicationDirectory(false),
+		"%SUGGESTED_DATA_PATH%": suggestDataDirectory(),
 	})
 
 	//#region maxLogFileSize {
@@ -381,17 +468,32 @@ func initConfigurations() confs.IConfs {
 	)
 	//#endregion }
 
-	//#region DbDirectory {
-	theConfs.CreateConfig("DbDirectory",
-		confs.WithPossibleNames([]string{"db-directory", "--db-directory", "VSS_DB_DIRECTORY"}),
-		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_DIRECTORY%/database")),
+	//#region DbDriver {
+	theConfs.CreateConfig("DbDriver",
+		confs.WithPossibleNames([]string{"db-driver", "--db-driver", "VSS_DB_DRIVER"}),
+		confs.WithDefaultValue(misc.NewDynamicVar("ramcacheddb")),
+		confs.WithValidationFunc(func(conf confs.IConfItem) error {
+			value := conf.NotMappedValue()
+			valueStr := strings.ToLower(value.GetString())
+			if !(valueStr == "ramcacheddb" || valueStr == "ramcacheddbpkv") {
+				return fmt.Errorf("received '%s', must be a valid database driver (ramcacheddb or ramcacheddbpkv)", valueStr)
+			}
+			return nil
+		}),
+	)
+	//#endregion }
+
+	//#region DbPath {
+	theConfs.CreateConfig("DbPath",
+		confs.WithPossibleNames([]string{"db-path", "--db-path", "VSS_DB_PATH"}),
+		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_PATH%/database")),
 	)
 	//#endregion }
 
 	//#region httpDataDir {
 	theConfs.CreateConfig("httpDataDir",
 		confs.WithPossibleNames([]string{"http-data-directory", "--http-data-directory", "--http-data-dir", "VSS_HTTP_DATA_DIRECTORY"}),
-		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_DIRECTORY%/http_data")),
+		confs.WithDefaultValue(misc.NewDynamicVar("%SUGGESTED_DATA_PATH%/http_data")),
 	)
 	//#endregion }
 
@@ -643,10 +745,26 @@ func setupStdoutAndStderrInterception(logManager logger.ILogger) {
 
 func initStorage(configs confs.IConfs, logger logger.ILogger) storage.IStorage {
 
-	dbDirectoryConfig := configs.GetConfig("DbDirectory").Value()
-	dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
-	_ = os.MkdirAll(dbDirectoryConfig.GetString(), 0755)
-	theStorage := storage.NewRamCacheDB(logger, dbDirectoryConfig.GetString(), dbDumpIntervalConfig.GetInt())
+	DbDriverConfig := configs.GetConfig("DbDriver").Value()
+	DbPathConfig := configs.GetConfig("DbPath").Value()
+
+	var theStorage storage.IStorage = nil
+	var err error = nil
+
+	if DbDriverConfig.GetString() == "ramcacheddbpkv" {
+		logger.Info("    using a RamCacheDB Driver (data are load/stored in a txt file)")
+		dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
+		_ = os.MkdirAll(DbPathConfig.GetString(), 0755)
+		theStorage = storage.NewRamCacheDB(logger, DbPathConfig.GetString(), dbDumpIntervalConfig.GetInt())
+	} else {
+		logger.Info("    using a RamCacheDBPKV Driver (data are load/stored in a prefixtree file)")
+		dbDumpIntervalConfig := configs.GetConfig("RamCacheDbDumpIntervalMs").Value()
+		theStorage, err = storage.NewRamCachedDBPkv(logger, DbPathConfig.GetString(), dbDumpIntervalConfig.GetInt())
+		if err != nil {
+			logger.Error("Main", "Failed to initialize storage: "+err.Error())
+			panic("Failed to initialize storage: " + err.Error())
+		}
+	}
 
 	return theStorage
 }
