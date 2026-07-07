@@ -24,23 +24,59 @@
 - Use in IoT projects to manage device states and configurations.
 - Allow communication between applications (microservices, web apps, etc.).
 
-# Compiling and running
 
-use ./pman.h build to comile the project. A binary file will  be created in the 'build' folder.
+# Development and Deployment
+This project is set up for dev Container workflow in VS Code. Dev container contains all dependencies, tools and vscode extensions needed (and util) for development.
 
-# Configuration source order
+## pman.sh script
 
-Vss can load configuration values from three sources: command line arguments, environment variables, and a configuration file. When the same setting is defined in more than one source, VSS uses the following priority order:
-1. Command line arguments (highest priority)
-2. Environment variables
-3. Configuration file (lowest priority)
+This project includes a project management script, `pman.sh`, that have some useful commands for helping the development process. You can use it with `./pman.sh <command>`.
 
-read mode details in [Configuration Importante](./docs/confs_sources_priority.md)
+The most important command of pman.sh is `init`. This command prepares the project for development (installing git hooks, restoring dependencies, etc.) and you should run it at least once. After that, you may want to run it again from time to time to make sure your project is in good shape.
 
-# Interacting with VSS from terminal
-    You can interact with VSS using its HTTP API or VSTP protocol.
+```shell
+./pman.sh init
+```
 
-## setting and getting a variable
+Run `./pman.sh --help` to see all available commands and their descriptions.
+
+Important: pman.sh is `Bash` script, so it may not work with Zsh or other shells. If you are using a different shell, you can run it with `bash ./pman.sh <command>`.
+
+## Steps for Developers: Opening, and Building with VS Code
+If you want to contribute to the project, follow these steps to open, build, and deploy it:
+
+### 1) Open in VS Code Dev Container
+
+1. Open this folder in VS Code.
+2. Run **Dev Containers: Reopen in Container**.
+
+### 2) Run `./pman.sh init`
+This step is very important, as it restores the project dependencies, install git hooks and performs other setup tasks required for development.
+You can read more about `pman.sh` below.
+
+[Read more about `pman.sh`](#pman.sh-script).
+
+### 3) Build the Project
+
+```bash
+./pman.sh build
+```
+
+You can also use the vscode build commands to build the project (project includes a .vscode folder with tasks and launch configurations).
+
+## Other dev tips
+
+### Interacting with VSS from terminal
+    You can interact with VSS using its HTTP API or VSTP protocol. VSTP Is a custom TCP-based protocol designed for efficient communication with VSS. Vstp can be explored using telnet.
+
+    Once in a telnet session, you can use the `help` command to see a list of available commands and their descriptions.
+
+```bash
+telnet localhost 5032
+help
+```
+
+### Interacting with VSS using HTTP API
 You can set and get variables on terminal by use of curl command. See the examples bellow:
 
 ```bash
@@ -62,6 +98,15 @@ curl http://192.168.100.2:5023/n0/tests/testvariable
 curl -H "accept: text/plain" http://192.168.100.2:5023/n0/tests/testvariable
 #result: n0.tests.testvariable=the value of the variable
 ```
+
+# Configuration reading order
+
+Vss can load configuration values from three sources: command line arguments, environment variables, and a configuration file. When the same setting is defined in more than one source, VSS uses the following priority order:
+1. Command line arguments (highest priority)
+2. Environment variables
+3. Configuration file (lowest priority)
+
+read mode details in [Configuration Importante](./docs/confs_sources_priority.md)
 
 # Further information
 
