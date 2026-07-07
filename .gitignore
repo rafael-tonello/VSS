@@ -47,4 +47,5 @@ tests/makefile
 *.log
 .pman
 
-build/
+/build
+
