@@ -147,19 +147,18 @@
     }
     
     afterCommit(){
-        checkMain(){
-            #if commit to main, runs ./shu/tools/apply-or-create-new-version.sh
-            if [ "$(git rev-parse --abbrev-ref HEAD)" = "main" ]; then
-                #source ./shu/tools/apply-or-create-new-version.sh
-                new-version
-            fi
-        }
-        checkMain
+        :;
     }
 
     afterMerge(){
-        COMMIT_MSG_FILE="$1"
-        COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+        local lastCommitDtSeconds=$(git log -1 --format=%ct)
+        local currDtSeconds=$(date +%s)
+        local secondsSinceLastCommit=$((currDtSeconds - lastCommitDtSeconds))
+        
+        if [ "$secondsSinceLastCommit" -lt 20 ]; then
+            echo "Commit was made by this script, skipping afterMerge hook..."
+            return 0
+        fi
 
         checkMain(){
             #if commit to main, runs ./shu/tools/apply-or-create-new-version.sh

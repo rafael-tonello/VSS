@@ -88,7 +88,7 @@ tryCreateVersion(){
         patch=0
     elif [ "$INCREMENT_MINOR" = true ]; then
         razon="Commit(s) starting with 'feat'"
-        ehco "inc minor"
+        echo "inc minor"
         minor=$((minor + 1))
         patch=0
     elif [ "$INCREMENT_PATCH" = true ]; then
@@ -199,10 +199,14 @@ main(){
     fi
 
     if [ $dryrun == false ]; then
-        echo "# Version $version changes" >> CHANGELOG.md
+        #add a titlte to the top of the CHANGELOG.md file with the version number
+        local existingChangelogText=$(cat CHANGELOG.md)
+        echo "# Version $version changes" > CHANGELOG.md
     else
         echo "dry run: mimicking 'echo \"# Version $version changes\" >> CHANGELOG.md'"
     fi
+
+    
 
     for commit in $(git log --pretty=format:"%H" "$lastTag"..HEAD); do
         local message=$(git log -1 --pretty=%B $commit)
@@ -221,6 +225,10 @@ main(){
 
     if [ $dryrun == false ]; then
         echo "" >> CHANGELOG.md
+        if [ "$existingChangelogText" != "# dev team notes" ]; then
+            echo "$existingChangelogText" >> CHANGELOG.md
+            echo "" >> CHANGELOG.md
+        fi
     else
         echo "dry run: mimicking 'add a new line to CHANGELOG.md'"
     fi
@@ -290,7 +298,7 @@ main(){
     git checkout develop
 
     if [ $dryrun == false ]; then
-        echo "" > CHANGELOG.md
+        echo "# dev team notes" > CHANGELOG.md
         git add CHANGELOG.md
         git commit -m "chore: creates new empty CHANGELOG.md for next version"
         git push origin develop
